@@ -40,6 +40,8 @@ import {
 } from "react-icons/ri";
 
 const generateRandomPositions = (count = 30, minDistance = 100) => {
+  if (typeof document === "undefined") return [];
+
   const width = document.documentElement.scrollWidth;
   const height = document.documentElement.scrollHeight;
   const positions = [];
@@ -98,15 +100,13 @@ const Icons = [
 ];
 
 const PatternGrid = () => {
-  const positions = useMemo(generateRandomPositions, []);
+  const positions = useMemo(() => generateRandomPositions(), []);
 
   return (
-    <div className="-z-[90] absolute top-0 left-0  w-full h-full overflow-hidden">
-      {Array.from({ length: 30 }).map((_, index) => {
-        const Icon = [...Icons][index];
-        return (
-          <PatternItem key={index} position={positions[index]} Icon={Icon} />
-        );
+    <div className="-z-[90] absolute top-0 left-0 w-full h-full overflow-hidden">
+      {positions.map((position, index) => {
+        const Icon = Icons[index % Icons.length];
+        return <PatternItem key={index} position={position} Icon={Icon} />;
       })}
     </div>
   );

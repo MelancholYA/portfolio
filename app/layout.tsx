@@ -3,6 +3,7 @@ import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import GridBackground from "../components/Grid";
 import PatternGrid from "../components/Pattern";
+import HomeLoader from "../components/loader";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -29,9 +30,12 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${poppins.variable} font-sans relative `}
       >
-        <PatternGrid />
-        <GridBackground />
-        {children}
+        <HomeLoader>
+          <PatternGrid />
+          <GridBackground />
+
+          {children}
+        </HomeLoader>
       </body>
     </html>
   );

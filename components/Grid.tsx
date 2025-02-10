@@ -8,19 +8,26 @@ interface MousePosition {
 
 const GridBackground: React.FC = () => {
   const [mousePos, setMousePos] = useState<MousePosition>({
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
+    x: 0,
+    y: 0,
   });
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Update mouse position on mouse move
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
+    if (typeof window !== "undefined") {
+      const handleMouseMove = (e: MouseEvent) => {
+        setMousePos({ x: e.clientX, y: e.clientY });
+      };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+      setMousePos({
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+      });
+
+      window.addEventListener("mousemove", handleMouseMove);
+      return () => window.removeEventListener("mousemove", handleMouseMove);
+    }
   }, []);
 
   // Draw grid and glow effect on canvas
