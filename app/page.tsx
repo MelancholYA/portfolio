@@ -235,15 +235,15 @@ const page = () => {
               i % 2 === 0 ? "flex-row" : "flex-row-reverse"
             }`}
           >
-            <div className="w-6/12 aspect-video shrink-0 relative ">
+            <div className="  relative ">
               <Image
                 src={item.image}
                 alt="Lexonate"
                 width={600}
                 height={350}
-                className="rounded w-full h-full group-hover:opacity-25 transition-all backdrop-blur-lg object-cover "
+                className="rounded w-full h-full group-hover:opacity-80 transition-all backdrop-blur-lg object-cover "
               />
-              <div className="absolute duration-300 overflow-hidden group-hover:opacity-100 bottom-0 left-0 w-full h-full opacity-0 transition-all bg-black/15 flex items-center justify-center">
+              <div className="absolute duration-300  overflow-hidden group-hover:opacity-100 bottom-0 left-0 w-full h-full opacity-0 transition-all bg-black/60 flex items-center justify-center">
                 <Link href={item.link} target="_blank">
                   <RxExternalLink className="text-4xl mx-auto font-bold text-center text-white" />
                   <p className="text-lg font-semibold text-center text-white">
@@ -253,7 +253,7 @@ const page = () => {
               </div>
             </div>
 
-            <div className=" backdrop-blur-3xl p-3 rounded">
+            <div className=" backdrop-blur-3xl p-3 rounded w-7/12 shrink-0">
               <h3 className="font-bold ">{item.title}</h3>
               <p className="mt-3">
                 <span className="font-semibold">Role : </span>
