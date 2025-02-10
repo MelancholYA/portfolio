@@ -88,8 +88,12 @@ const page = () => {
         <SkillsetGrid />
 
         <div className="flex gap-3 items-center mt-6">
-          <button className="btn-primary">Get in touch</button>
-          <button className="btn-secondary">Check Projects</button>
+          <Link href="/#projects" className="btn-primary">
+            Get in touch
+          </Link>
+          <Link href="/#projects" className="btn-secondary">
+            Check Projects
+          </Link>
         </div>
 
         <BsFillMouseFill
@@ -222,7 +226,7 @@ const page = () => {
 
       {/* Projects */}
 
-      <section className="container p-6 mt-6">
+      <section className="container p-6 mt-6" id="projects">
         <h2 className="mb-12 ">Featured Projects</h2>
         {projects.map((item, i) => (
           <div

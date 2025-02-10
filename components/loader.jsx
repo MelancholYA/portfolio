@@ -2,30 +2,28 @@
 
 import { useState, useEffect } from "react";
 
-const HomeLoader = ({ children }) => {
+const HomeLoader = () => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const handleDOMContentLoaded = () => {
+    const handleLoad = () => {
       setVisible(false);
     };
 
     if (typeof document !== "undefined") {
-      if (document.readyState === "interactive") {
-        console.log({ d: document.readyState });
+      if (document.readyState === "complete") {
         setVisible(false);
       } else {
-        window.addEventListener("DOMContentLoaded", handleDOMContentLoaded);
-        console.log({ d: document.readyState });
+        window.addEventListener("load", handleLoad);
       }
     }
 
     return () => {
-      window.removeEventListener("DOMContentLoaded", handleDOMContentLoaded);
+      window.removeEventListener("load", handleLoad);
     };
   }, []);
 
-  if (!visible) return children;
+  if (!visible) return null;
 
   return (
     <>

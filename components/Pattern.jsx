@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BiCodeBlock,
   BiCodeCurly,
@@ -40,7 +40,7 @@ import {
 } from "react-icons/ri";
 
 const generateRandomPositions = (count = 30, minDistance = 100) => {
-  if (typeof document === "undefined") return [];
+  if (typeof window === "undefined") return [];
 
   const width = document.documentElement.scrollWidth;
   const height = document.documentElement.scrollHeight;
@@ -100,7 +100,11 @@ const Icons = [
 ];
 
 const PatternGrid = () => {
-  const positions = useMemo(() => generateRandomPositions(), []);
+  const [positions, setPositions] = useState([]);
+
+  useEffect(() => {
+    setPositions(generateRandomPositions());
+  }, []);
 
   return (
     <div className="-z-[90] absolute top-0 left-0 w-full h-full overflow-hidden">
