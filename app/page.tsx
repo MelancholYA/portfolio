@@ -1,13 +1,16 @@
+"use client";
 import { BsFillMouseFill } from "react-icons/bs";
 import SkillsetGrid from "../components/Skills";
+import ImageDistorion from "../components/ImageDistorion";
 import Image from "next/image";
 import { RxExternalLink } from "react-icons/rx";
 import Link from "next/link";
+import Contact from "../components/contact";
 
 const projects = [
   {
     title: "Lexonate – CMS for Scalable Content & Internalization",
-    role: "Founder & Lead Developer",
+    role: "Founder & Solo Developer",
     image: "/projects/lexonate.png",
     featured: true,
     link: "https://lexonate-web.vercel.app/",
@@ -70,6 +73,40 @@ const projects = [
   },
 ];
 
+const myJourney = {
+  title: "My Journey",
+  subtitle: "From Self-Taught Developer to Product Builder",
+  intro:
+    "My journey into web development wasn’t conventional—it was fueled by curiosity, passion, and relentless learning. I started as a self-taught developer, diving deep into JavaScript, TypeScript, and the React ecosystem, crafting projects that pushed my limits.",
+  sections: [
+    {
+      title: "Early Days – Building the Foundation",
+      content:
+        "I began by reverse-engineering complex UIs, breaking down intricate designs into reusable React components. My first hands-on experience came with freelance projects, where I transformed Figma designs into high-performance web applications.",
+    },
+    {
+      title: "Breaking into the Industry",
+      content:
+        "I landed my first major role at Legal Doctrine, where I refined my skills in Next.js, React Query, and API integrations, working on an AI-powered legal research platform. This experience shaped my approach to performance optimization and scalable architectures.",
+    },
+    {
+      title: "Growth & Innovation",
+      content:
+        "Working with IDAA Academy gave me insights into e-learning platforms, crafting interactive dashboards and seamless UX/UI experiences. But I wanted more—I wanted to build something from scratch.",
+    },
+    {
+      title: "Lexonate – My Vision in Action",
+      content:
+        "I founded Lexonate, a CMS designed for scalable content and internalization, solving real-world challenges in multilingual web apps. Here, I combined full-stack expertise (Next.js, Node.js, Tailwind, Express) with my deep understanding of role-based access control (RBAC) to create a seamless product.",
+    },
+    {
+      title: "What’s Next?",
+      content:
+        "I’m always seeking challenges that push boundaries—whether it's optimizing performance, crafting intuitive interfaces, or building products that make an impact.",
+    },
+  ],
+};
+
 const page = () => {
   return (
     <main>
@@ -102,6 +139,95 @@ const page = () => {
         />
       </section>
 
+      {/* About */}
+      <section className="container my-24 mb-36">
+        <div className="p-6 m  flex items-center bg-secondary rounded shadow-lg shadow-primary/5 gap-3 backdrop-blur-xl">
+          <div className="w-5/12 shrink-0 h-full">
+            <ImageDistorion />
+          </div>
+          <div>
+            {" "}
+            <h2>{myJourney.title}</h2>
+            <h3 className="text-base text-primary mt-1">
+              {myJourney.subtitle}
+            </h3>
+            <p className="my-2">{myJourney.intro}</p>
+            <ul>
+              {myJourney.sections.map((section, i) => (
+                <li className="list-none" key={`sction-${i}`}>
+                  <h4 className="font-semibold mb-1">🔹 {section.title}</h4>
+                  <p className="!text-sm font-light">{section.content}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects */}
+
+      <section className="container p-6 " id="projects">
+        <h2 className="mb-12 ">Featured Projects</h2>
+        {projects.map((item, i) => (
+          <div
+            key={item.title}
+            className={`flex group gap-3  my-24 ${
+              i % 2 !== 0 ? "flex-row" : "flex-row-reverse"
+            }`}
+          >
+            <div className="  relative ">
+              <Image
+                src={item.image}
+                alt="Lexonate"
+                width={600}
+                height={350}
+                className="rounded w-full h-full group-hover:opacity-80 transition-all backdrop-blur-lg object-cover "
+              />
+              <div className="absolute duration-300  overflow-hidden group-hover:opacity-100 bottom-0 left-0 w-full h-full opacity-0 transition-all bg-black/60 flex items-center justify-center">
+                <Link href={item.link} target="_blank">
+                  <RxExternalLink className="text-4xl mx-auto font-bold text-center text-white" />
+                  <p className="text-lg font-semibold text-center text-white">
+                    Visit Website
+                  </p>
+                </Link>
+              </div>
+            </div>
+
+            <div className=" backdrop-blur-3xl p-3 rounded w-7/12 shrink-0">
+              <h3 className="font-bold ">{item.title}</h3>
+              <p className="mt-3">
+                <span className="font-semibold">Role : </span>
+                {item.role}
+              </p>
+              <p className="mb-3">
+                <span className="font-semibold"> Tech Stack :</span>
+                {item.stack.map((skill, i) => (
+                  <span
+                    className="inline-block px-2 bg-primary/15 rounded m-1 "
+                    key={skill + i}
+                  >
+                    {skill}
+                  </span>
+                ))}{" "}
+              </p>
+              <p>{item.briefe}</p>
+              <ul className="ps-2">
+                {item.tasks.map((task) => (
+                  <li key={task}>{task}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* Technologies */}
+
+      <section className="container p-6 my-24">
+        <h2 className="mb-12 text-center">Technologies</h2>
+        <SkillsetGrid isFullSet />
+      </section>
+
       {/* Experience */}
 
       <section className="container p-6 ">
@@ -112,7 +238,7 @@ const page = () => {
             alt="legal doctrine"
             width={600}
             height={315}
-            className="opacity-70 backdrop-blur-lg brightness-125 sticky top-0"
+            className="opacity-70 backdrop-blur-lg shadow-lg shadow-primary/10 brightness-125 sticky top-0"
           />
           <div className="p-6 rounded backdrop-blur-2xl">
             <h3 className="font-bold">Legal Doctrine</h3>
@@ -217,69 +343,7 @@ const page = () => {
         </div>
       </section>
 
-      {/* Technologies */}
-
-      <section className="container p-6 my-24">
-        <h2 className="mb-12 text-center">Technologies</h2>
-        <SkillsetGrid isFullSet />
-      </section>
-
-      {/* Projects */}
-
-      <section className="container p-6 mt-6" id="projects">
-        <h2 className="mb-12 ">Featured Projects</h2>
-        {projects.map((item, i) => (
-          <div
-            key={item.title}
-            className={`flex group gap-3  my-12 ${
-              i % 2 === 0 ? "flex-row" : "flex-row-reverse"
-            }`}
-          >
-            <div className="  relative ">
-              <Image
-                src={item.image}
-                alt="Lexonate"
-                width={600}
-                height={350}
-                className="rounded w-full h-full group-hover:opacity-80 transition-all backdrop-blur-lg object-cover "
-              />
-              <div className="absolute duration-300  overflow-hidden group-hover:opacity-100 bottom-0 left-0 w-full h-full opacity-0 transition-all bg-black/60 flex items-center justify-center">
-                <Link href={item.link} target="_blank">
-                  <RxExternalLink className="text-4xl mx-auto font-bold text-center text-white" />
-                  <p className="text-lg font-semibold text-center text-white">
-                    Visit Website
-                  </p>
-                </Link>
-              </div>
-            </div>
-
-            <div className=" backdrop-blur-3xl p-3 rounded w-7/12 shrink-0">
-              <h3 className="font-bold ">{item.title}</h3>
-              <p className="mt-3">
-                <span className="font-semibold">Role : </span>
-                {item.role}
-              </p>
-              <p className="mb-3">
-                <span className="font-semibold"> Tech Stack :</span>
-                {item.stack.map((skill, i) => (
-                  <span
-                    className="inline-block px-2 bg-primary/15 rounded m-1 "
-                    key={skill + i}
-                  >
-                    {skill}
-                  </span>
-                ))}{" "}
-              </p>
-              <p>{item.briefe}</p>
-              <ul className="ps-2">
-                {item.tasks.map((task) => (
-                  <li key={task}>{task}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ))}
-      </section>
+      <Contact />
     </main>
   );
 };
