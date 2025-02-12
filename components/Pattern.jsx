@@ -44,12 +44,13 @@ const generateRandomPositions = (count = 30, minDistance = 100) => {
 
   const width = document.documentElement.scrollWidth;
   const height = document.documentElement.scrollHeight;
+
   const positions = [];
 
   while (positions.length < count) {
     const newPosition = {
       x: Math.random() * (width - 50), // Keep away from edges
-      y: Math.random() * (height - 50),
+      y: Math.random() * (height - 250),
     };
 
     // Ensure positions are not too close
@@ -107,7 +108,7 @@ const PatternGrid = () => {
   }, []);
 
   return (
-    <div className="-z-[90] absolute top-0 left-0 w-full h-full overflow-hidden">
+    <div className="-z-[90]  absolute top-0 left-0 w-full h-full overflow-hidden">
       {positions.map((position, index) => {
         const Icon = Icons[index % Icons.length];
         return <PatternItem key={index} position={position} Icon={Icon} />;

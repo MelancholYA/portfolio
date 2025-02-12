@@ -9,51 +9,104 @@ interface MousePosition {
 
 const GridBackground: React.FC = () => {
   const [mousePos, setMousePos] = useState<MousePosition>({
-    x: 0,
-    y: 0,
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
   });
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Update mouse position on mouse move
+  const [targetPos, setTargetPos] = useState<MousePosition>({
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+  });
+
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isMobile = window.innerWidth < 768; // Adjust threshold as needed
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const handleMouseMove = (e: MouseEvent) => {
+    const updateMousePosition = (e: MouseEvent) => {
+      if (!isMobile) {
         setMousePos({ x: e.clientX, y: e.clientY });
+      }
+    };
+
+    if (!isMobile) {
+      window.addEventListener("mousemove", updateMousePosition);
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", updateMousePosition);
+    };
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (isMobile) {
+      let animationFrame: ReturnType<typeof setTimeout>;
+
+      const moveRandomly = () => {
+        setTargetPos({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+        });
+
+        animationFrame = setTimeout(moveRandomly, 3000); // Change target position every 3s
       };
 
-      setMousePos({
-        x: window.innerWidth / 2,
-        y: window.innerHeight / 2,
-      });
-
-      window.addEventListener("mousemove", handleMouseMove);
-      return () => window.removeEventListener("mousemove", handleMouseMove);
+      moveRandomly();
+      return () => clearTimeout(animationFrame);
     }
-  }, []);
+  }, [isMobile]);
 
-  // Draw grid and glow effect on canvas
+  // Smoothly interpolate glow movement on mobile
+  useEffect(() => {
+    if (!isMobile) return;
+
+    let animationFrame: number;
+
+    const lerp = (start: number, end: number, factor: number) =>
+      start + (end - start) * factor;
+
+    const smoothMove = () => {
+      setMousePos((prev) => ({
+        x: lerp(prev.x, targetPos.x, 0.05), // Smooth transition
+        y: lerp(prev.y, targetPos.y, 0.05),
+      }));
+
+      animationFrame = requestAnimationFrame(smoothMove);
+    };
+
+    smoothMove();
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isMobile, targetPos]);
+
+  // Canvas Drawing Effect
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const resizeCanvas = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
     const gridSize = 40;
 
     const draw = () => {
-      const width = (canvas.width = canvas.offsetWidth);
-      const height = (canvas.height = canvas.offsetHeight);
+      const width = canvas.width;
+      const height = canvas.height;
 
       ctx.clearRect(0, 0, width, height);
       ctx.strokeStyle = "rgba(255, 255, 255, 0.185)";
       ctx.lineWidth = 0.5;
 
-      // Draw vertical lines with distortion
       for (let x = 0; x <= width; x += gridSize) {
         ctx.beginPath();
         for (let y = 0; y <= height; y += 2) {
           const distX = x - mousePos.x;
           const distY = y - mousePos.y;
-          const distance = Math.sqrt(distX * distX + distY * distY);
+          const distance = Math.sqrt(distX ** 2 + distY ** 2);
           const maxDist = 150;
           const distortionStrength = Math.max(0, 1 - distance / maxDist);
           const offsetX = distortionStrength * 20 * (distX / distance || 0);
@@ -67,13 +120,12 @@ const GridBackground: React.FC = () => {
         ctx.stroke();
       }
 
-      // Draw horizontal lines with distortion
       for (let y = 0; y <= height; y += gridSize) {
         ctx.beginPath();
         for (let x = 0; x <= width; x += 2) {
           const distX = x - mousePos.x;
           const distY = y - mousePos.y;
-          const distance = Math.sqrt(distX * distX + distY * distY);
+          const distance = Math.sqrt(distX ** 2 + distY ** 2);
           const maxDist = 150;
           const distortionStrength = Math.max(0, 1 - distance / maxDist);
           const offsetY = distortionStrength * 20 * (distY / distance || 0);
@@ -87,7 +139,6 @@ const GridBackground: React.FC = () => {
         ctx.stroke();
       }
 
-      // Add glow effect
       const gradient = ctx.createRadialGradient(
         mousePos.x,
         mousePos.y,
@@ -112,7 +163,11 @@ const GridBackground: React.FC = () => {
     };
 
     animate();
-    return () => cancelAnimationFrame(animationFrame);
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener("resize", resizeCanvas);
+    };
   }, [mousePos]);
 
   return (
@@ -126,7 +181,6 @@ const GridBackground: React.FC = () => {
 
       <canvas ref={canvasRef} className="w-full h-full absolute top-0 left-0" />
 
-      {/* Glowing Dot */}
       <div
         className="absolute w-4 h-4 rounded-full pointer-events-none"
         style={{
@@ -136,6 +190,7 @@ const GridBackground: React.FC = () => {
           boxShadow: `0 0 20px 10px rgba(255,255,255,0.3)`,
           filter: "blur(2px)",
           transform: "translate(-50%, -50%)",
+          transition: "transform 0.2s ease-out",
         }}
       />
     </div>

@@ -30,8 +30,8 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${poppins.variable} font-sans relative `}
       >
-        <HomeLoader />
         <PatternGrid />
+        <HomeLoader />
         <GridBackground />
 
         {children}

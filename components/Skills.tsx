@@ -47,14 +47,14 @@ const SkillsetGrid = ({ isFullSet = false }: { isFullSet?: boolean }) => {
       : []),
   ];
   return (
-    <div className="flex items-center justify-center gap-8 mt-6 flex-wrap w-full">
+    <div className="flex items-center justify-center gap-4 mt-6 flex-wrap w-full">
       {technologies.map(({ name, icon: Icon }, index) => (
         <div
           key={index}
-          className="flex rounded flex-col items-center p-3 hover:scale-125 backdrop-blur-md w-28 text-center transition-all duration-300"
+          className="flex rounded flex-col items-center p-3 hover:scale-110 backdrop-blur-md w-24 sm:w-28 text-center transition-all duration-300"
         >
-          <Icon className="text-white text-xl mb-3" />
-          <span className="text-white font-semibold tracking-wide whitespace-nowrap">
+          <Icon className="text-white text-lg sm:text-xl mb-2 sm:mb-3" />
+          <span className="text-white font-semibold tracking-wide whitespace-nowrap text-sm sm:text-base">
             {name}
           </span>
         </div>
