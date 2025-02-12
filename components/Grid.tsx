@@ -8,18 +8,23 @@ interface MousePosition {
 }
 
 const GridBackground: React.FC = () => {
-  const [mousePos, setMousePos] = useState<MousePosition>({
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
-  });
+  const [mousePos, setMousePos] = useState<MousePosition>({ x: 0, y: 0 });
+  const [targetPos, setTargetPos] = useState<MousePosition>({ x: 0, y: 0 });
 
-  const [targetPos, setTargetPos] = useState<MousePosition>({
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
-  });
+  useEffect(() => {
+    setMousePos({
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    });
+    setTargetPos({
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    });
+  }, []);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const isMobile = window.innerWidth < 768; // Adjust threshold as needed
+  const isMobile =
+    typeof window !== "undefined" ? window.innerWidth < 768 : false; // Adjust threshold as needed
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
