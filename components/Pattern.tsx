@@ -39,16 +39,21 @@ import {
   RiTerminalBoxLine,
 } from "react-icons/ri";
 
-const generateRandomPositions = (count = 30, minDistance = 100) => {
+interface Position {
+  x: number;
+  y: number;
+}
+
+const generateRandomPositions = (count = 30, minDistance = 100): Position[] => {
   if (typeof window === "undefined") return [];
 
   const width = document.documentElement.scrollWidth;
   const height = document.documentElement.scrollHeight;
 
-  const positions = [];
+  const positions: Position[] = [];
 
   while (positions.length < count) {
-    const newPosition = {
+    const newPosition: Position = {
       x: Math.random() * (width - 50), // Keep away from edges
       y: Math.random() * (height - 250),
     };
@@ -100,15 +105,15 @@ const Icons = [
   RiComputerLine,
 ];
 
-const PatternGrid = () => {
-  const [positions, setPositions] = useState([]);
+const PatternGrid: React.FC = () => {
+  const [positions, setPositions] = useState<Position[]>([]);
 
   useEffect(() => {
     setPositions(generateRandomPositions());
   }, []);
 
   return (
-    <div className="-z-[90]  absolute top-0 left-0 w-full h-full overflow-hidden">
+    <div className="-z-[90] absolute top-0 left-0 w-full h-full overflow-hidden">
       {positions.map((position, index) => {
         const Icon = Icons[index % Icons.length];
         return <PatternItem key={index} position={position} Icon={Icon} />;
@@ -117,12 +122,17 @@ const PatternGrid = () => {
   );
 };
 
-const PatternItem = ({ Icon, position }) => {
+interface PatternItemProps {
+  Icon: React.ComponentType;
+  position: Position;
+}
+
+const PatternItem: React.FC<PatternItemProps> = ({ Icon, position }) => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const boxRef = useRef(null);
+  const boxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       if (boxRef.current) {
         const rect = boxRef.current.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;

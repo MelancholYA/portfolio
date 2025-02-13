@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 
-const HomeLoader = () => {
-  const [visible, setVisible] = useState(true);
+const HomeLoader: React.FC = () => {
+  const [visible, setVisible] = useState<boolean>(true);
 
   useEffect(() => {
     const handleLoad = () => {
