@@ -11,7 +11,6 @@ const projects = [
     link: "https://lexonate-web.vercel.app/",
     stack: [
       "Next.js",
-      "TypeScript",
       "Tailwind CSS",
       "MUI",
       "React Query",
@@ -39,8 +38,6 @@ const projects = [
       "Tailwind CSS",
       "Redux",
       "React Query",
-      "Node.js",
-      "Express.js",
     ],
     briefe:
       "Legal Doctrine is an advanced AI-driven legal research platform that streamlines legal workflows. My contributions include:",
@@ -52,18 +49,18 @@ const projects = [
     ],
   },
   {
-    title: "IDAA Academy – E-Learning Platform for AI & Data Science",
+    title: "IDAA Academy – Specialized Training in Business Law",
     role: "Frontend Engineer",
     link: "https://idaa.academy/",
     image: "/projects/idaa.png",
-    stack: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Redux"],
+    stack: ["React.js", "Next.js", "TypeScript", "Tailwind CSS"],
     briefe:
-      "IDAA Academy is a premier e-learning platform offering AI and data science courses. My contributions include:",
+      "IDAA Academy is a premier institution offering multidisciplinary and professional training programs in business law. My contributions include:",
     tasks: [
-      "Built an intuitive, high-performance learning dashboard with Next.js & Tailwind CSS",
-      "Designed a responsive, accessible UI for seamless student engagement",
-      "Optimized API integrations for course management and progress tracking",
-      "Implemented interactive elements to enhance the user experience",
+      "Developed a user-friendly interface to showcase various training programs and workshops.",
+      "Implemented responsive design principles to ensure accessibility across devices.",
+      "Optimized course search and filtering functionalities for enhanced user experience.",
+      "Collaborated with the backend team to integrate dynamic content and calendars.",
     ],
   },
 ];
@@ -78,7 +75,7 @@ const Projects = () => {
         <div
           key={item.title}
           className={`flex flex-col md:flex-row group gap-3 my-24 ${
-            i % 2 !== 0 ? "md:flex-row" : "md:flex-row-reverse"
+            i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
           }`}
         >
           <div className="relative w-full md:w-1/2">
