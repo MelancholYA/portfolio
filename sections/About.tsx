@@ -37,7 +37,7 @@ const myJourney = {
 const About = () => {
   return (
     <section className="container my-24 mb-36">
-      <div className="flex flex-col lg:flex-row lg:space-x-8">
+      <div className="flex flex-col lg:flex-row items-center lg:space-x-8">
         <div className="w-full lg:w-5/12 shrink-0 h-full mb-8 lg:mb-0">
           <ImageDistorion />
         </div>
