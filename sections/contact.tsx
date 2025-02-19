@@ -80,7 +80,7 @@ export default function Contact() {
               <div className="space-y-6">
                 <a
                   href="mailto:ouardi.yacin3@gmail.com"
-                  className="group flex items-center p-4 bg-black/25 rounded-lg backdrop-blur-sm border border-gray-800 hover:border-gray-700 transition-all duration-300"
+                  className="group flex items-center p-4 bg-black/25 rounded-lg hue border border-gray-800 hover:border-gray-700 transition-all duration-300"
                 >
                   <span className="flex items-center justify-center w-12 h-12  bg-primary/15 rounded-full">
                     <FiMail className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
@@ -98,7 +98,7 @@ export default function Contact() {
                   href="https://github.com/melancholYA/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center p-4 bg-black/25 rounded-lg backdrop-blur-sm border border-gray-800 hover:border-gray-700 transition-all duration-300"
+                  className="group flex items-center p-4 bg-black/25 rounded-lg hue border border-gray-800 hover:border-gray-700 transition-all duration-300"
                 >
                   <span className="flex items-center justify-center w-12 h-12  bg-primary/15 rounded-full">
                     <FiGithub className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
@@ -116,7 +116,7 @@ export default function Contact() {
                   href="https://www.linkedin.com/in/yacine-ouardi/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center p-4 bg-black/25 rounded-lg backdrop-blur-sm border border-gray-800 hover:border-gray-700 transition-all duration-300"
+                  className="group flex items-center p-4 bg-black/25 rounded-lg hue border border-gray-800 hover:border-gray-700 transition-all duration-300"
                 >
                   <span className="flex items-center justify-center w-12 h-12  bg-primary/15 rounded-full">
                     <FiLinkedin className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
@@ -134,7 +134,7 @@ export default function Contact() {
                 <a
                   href="/resume.pdf"
                   download
-                  className="group flex items-center p-4 bg-black/25 rounded-lg backdrop-blur-sm border border-gray-800 hover:border-gray-700 transition-all duration-300"
+                  className="group flex items-center p-4 bg-black/25 rounded-lg hue border border-gray-800 hover:border-gray-700 transition-all duration-300"
                 >
                   <span className="flex items-center justify-center w-12 h-12  bg-primary/15 rounded-full">
                     <PiReadCvLogoBold className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
@@ -156,7 +156,7 @@ export default function Contact() {
             <h3 className="text-xl font-semibold text-white mb-8">
               Send a Message
             </h3>
-            <div className="relative p-8 bg-black/25 rounded-2xl backdrop-blur-sm border border-gray-800">
+            <div className="relative p-8 bg-black/25 rounded-2xl hue border border-gray-800">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="relative">
                   <label

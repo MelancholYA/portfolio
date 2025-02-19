@@ -114,3 +114,17 @@ li {
 .dark a {
   @apply text-gray-100;
 }
+
+.hue {
+  animation: hue 5s alternate-reverse infinite;
+  backdrop-filter: blur(16px);
+}
+
+@keyframes hue {
+  from {
+    backdrop-filter: sepia(4) hue-rotate(0deg) blur(16px);
+  }
+  to {
+    backdrop-filter: sepia(4) hue-rotate(360deg) blur(16px);
+  }
+}

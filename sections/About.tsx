@@ -41,7 +41,7 @@ const About = () => {
         <div className="w-full lg:w-5/12 shrink-0 h-full mb-8 lg:mb-0">
           <ImageDistorion />
         </div>
-        <div className="w-full lg:w-7/12 backdrop-blur p-6 rounded">
+        <div className="w-full lg:w-7/12 hue p-6 rounded">
           <h2>{myJourney.title}</h2>
           <h3 className="text-base text-primary mt-1">{myJourney.subtitle}</h3>
           <p className="my-2">{myJourney.intro}</p>

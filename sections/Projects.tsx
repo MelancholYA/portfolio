@@ -96,7 +96,7 @@ const Projects = () => {
             </div>
           </div>
 
-          <div className="backdrop-blur-3xl p-3 rounded w-full md:w-7/12 shrink-0">
+          <div className="hue p-3 rounded w-full md:w-7/12 shrink-0">
             <h3 className="font-bold text-xl md:text-2xl">{item.title}</h3>
             <p className="mt-3">
               <span className="font-semibold">Role: </span>

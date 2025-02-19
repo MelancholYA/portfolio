@@ -55,9 +55,9 @@ const Experience = () => {
             alt={exp.image.alt}
             width={600}
             height={315}
-            className="md:opacity-70 backdrop-blur-lg shadow-lg shadow-primary/10 brightness-125 sticky z-50 top-0 rounded w-full md:w-1/2"
+            className="md:opacity-70 hue shadow-lg shadow-primary/10 brightness-125 sticky z-50 top-0 rounded w-full md:w-1/2"
           />
-          <div className="p-6 rounded backdrop-blur-2xl w-full md:w-1/2">
+          <div className="p-6 rounded hue w-full md:w-1/2">
             <h3 className="font-bold text-xl md:text-2xl">{exp.company}</h3>
             <h4 className="text-lg font-semibold my-4">{exp.period}</h4>
             <p className="text-sm font-light">{exp.description}</p>
