@@ -4,6 +4,7 @@ import "./globals.css";
 import GridBackground from "../components/Grid";
 import PatternGrid from "../components/Pattern";
 import HomeLoader from "../components/loader";
+import { Analytics } from "@vercel/analytics/next";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -71,6 +72,7 @@ export default function RootLayout({
         <GridBackground />
 
         {children}
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
