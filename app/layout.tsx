@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
-import GridBackground from "../components/Grid";
-import PatternGrid from "../components/Pattern";
-import HomeLoader from "../components/loader";
+
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import HomeLoader from "../components/loader";
+
+const GridBackground = dynamic(() => import("../components/Grid"));
+const PatternGrid = dynamic(() => import("../components/Pattern"));
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -68,9 +72,10 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${poppins.variable} font-sans relative `}
       >
-        <PatternGrid />
-        <HomeLoader />
-        <GridBackground />
+        <Suspense fallback={<HomeLoader />}>
+          <PatternGrid />
+          <GridBackground />
+        </Suspense>
 
         {children}
         <Analytics />

@@ -1,4 +1,4 @@
-const HomeLoader: React.FC = () => {
+const loading = () => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black z-[9999]">
       <span className="loader"></span>
@@ -6,4 +6,4 @@ const HomeLoader: React.FC = () => {
   );
 };
 
-export default HomeLoader;
+export default loading;
