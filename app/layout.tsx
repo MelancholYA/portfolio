@@ -2,14 +2,11 @@ import type { Metadata } from "next";
 import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import HomeLoader from "../components/loader";
 
-const GridBackground = dynamic(() => import("../components/Grid"));
-const PatternGrid = dynamic(() => import("../components/Pattern"));
+const GridBackground = dynamic(() => import("../components/Grid"), {});
+const PatternGrid = dynamic(() => import("../components/Pattern"), {});
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -33,7 +30,6 @@ export const metadata: Metadata = {
     "Web Developer",
     "Portfolio",
   ],
-
   openGraph: {
     title: "Yacine Ouardi | Frontend Developer",
     description: "Frontend Developer skilled in React, Next.js & TypeScript.",
@@ -62,6 +58,18 @@ export const metadata: Metadata = {
   },
 };
 
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Yacine Ouardi",
+  jobTitle: "Frontend Developer",
+  url: "https://yacine-ouardi.vercel.app/",
+  sameAs: [
+    "https://github.com/MelancholYA",
+    "https://www.linkedin.com/in/yacine-ouardi",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -70,30 +78,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${playfair.variable} ${poppins.variable} font-sans relative `}
+        className={`${playfair.variable} ${poppins.variable} font-sans relative`}
       >
-        <Suspense fallback={<HomeLoader />}>
+        {children}
+        <Suspense fallback={<div>Loading...</div>}>
           <PatternGrid />
           <GridBackground />
         </Suspense>
-
-        {children}
-        <Analytics />
-        <SpeedInsights />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Yacine Ouardi",
-              jobTitle: "Frontend Developer",
-              url: "https://yacine-ouardi.vercel.app/",
-              sameAs: [
-                "https://github.com/MelancholYA",
-                "https://www.linkedin.com/in/yacine-ouardi",
-              ],
-            }),
+            __html: JSON.stringify(schemaData),
           }}
         />
       </body>
