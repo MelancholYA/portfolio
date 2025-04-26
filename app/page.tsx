@@ -1,6 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import TestimonialsSection from "../sections/Testemonials";
 const sections = {
   Hero: dynamic(() => import("../sections/Hero"), { ssr: true }),
   About: dynamic(() => import("../sections/About"), { ssr: true }),
@@ -33,6 +34,9 @@ const Page = () => {
       </Suspense>
       <Suspense fallback={<div>Loading Experience...</div>}>
         <Experience />
+      </Suspense>
+      <Suspense fallback={<div>Loading Testimonials...</div>}>
+        <TestimonialsSection />
       </Suspense>
       <Suspense fallback={<div>Loading Contact...</div>}>
         <Contact />

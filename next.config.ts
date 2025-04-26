@@ -6,6 +6,15 @@ const nextConfig: NextConfig = {
     EMAIL_USER: process.env.EMAIL_USER,
     EMAIL_PASS: process.env.EMAIL_PASS,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "media.licdn.com",
+        pathname: "/dms/image/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
