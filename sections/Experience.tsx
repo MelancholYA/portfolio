@@ -41,7 +41,7 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section className="container p-6">
+    <section id="experience" className="container p-6">
       <h2 className="mb-12 text-2xl md:text-3xl lg:text-4xl">Experience</h2>
       {experiences.map((exp, index) => (
         <div

@@ -4,6 +4,7 @@ import "./globals.css";
 
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import Nav from "../components/Nav";
 
 const GridBackground = dynamic(() => import("../components/Grid"), {});
 const PatternGrid = dynamic(() => import("../components/Pattern"), {});
@@ -80,6 +81,7 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${poppins.variable} font-sans relative`}
       >
+        <Nav />
         {children}
         <Suspense fallback={<div>Loading...</div>}>
           <PatternGrid />

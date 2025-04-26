@@ -71,7 +71,7 @@ li {
 }
 
 a {
-  @apply text-primary hover:underline hover:text-opacity-80 transition-colors;
+  @apply text-primary hover:text-opacity-80 transition-colors;
 }
 
 .container {
