@@ -2,6 +2,11 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import TestimonialsSection from "../sections/Testemonials";
+
+const SectionLoader = dynamic(() => import("../components/section-loader"), {
+  ssr: true,
+});
+
 const sections = {
   Hero: dynamic(() => import("../sections/Hero"), { ssr: true }),
   About: dynamic(() => import("../sections/About"), { ssr: true }),
@@ -20,25 +25,26 @@ const Page = () => {
 
   return (
     <main>
-      <Suspense fallback={<div>Loading Hero...</div>}>
+      <SectionLoader variant="pulse" />
+      <Suspense>
         <Hero />
       </Suspense>
-      <Suspense fallback={<div>Loading About...</div>}>
+      <Suspense>
         <About />
       </Suspense>
-      <Suspense fallback={<div>Loading Projects...</div>}>
+      <Suspense>
         <Projects />
       </Suspense>
-      <Suspense fallback={<div>Loading Technologies...</div>}>
+      <Suspense>
         <Technologies />
       </Suspense>
-      <Suspense fallback={<div>Loading Experience...</div>}>
+      <Suspense>
         <Experience />
       </Suspense>
-      <Suspense fallback={<div>Loading Testimonials...</div>}>
+      <Suspense>
         <TestimonialsSection />
       </Suspense>
-      <Suspense fallback={<div>Loading Contact...</div>}>
+      <Suspense>
         <Contact />
       </Suspense>
     </main>

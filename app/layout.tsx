@@ -6,8 +6,12 @@ import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import Nav from "../components/Nav";
 
-const GridBackground = dynamic(() => import("../components/Grid"), {});
-const PatternGrid = dynamic(() => import("../components/Pattern"), {});
+const GridBackground = dynamic(() => import("../components/Grid"), {
+  ssr: true,
+});
+const PatternGrid = dynamic(() => import("../components/Pattern"), {
+  ssr: true,
+});
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -83,7 +87,7 @@ export default function RootLayout({
       >
         <Nav />
         {children}
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense>
           <PatternGrid />
           <GridBackground />
         </Suspense>
