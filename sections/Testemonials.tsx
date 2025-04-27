@@ -152,7 +152,7 @@ export default function TestimonialsSection() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="relative h-[400px] md:h-[320px]">
+          <div className="relative h-[600px] md:h-[320px]">
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={activeIndex}
@@ -167,7 +167,7 @@ export default function TestimonialsSection() {
                 }}
                 className="absolute w-full"
               >
-                <div className="hue backdrop-blur-md h-[400px] md:h-[320px] rounded-2xl p-8 md:p-10 border border-white/10 shadow-xl">
+                <div className="hue backdrop-blur-md h-[600px] md:h-[320px] rounded-2xl p-8 md:p-10 border border-white/10 shadow-xl">
                   <div className="flex flex-col md:flex-row gap-6 items-start">
                     <div className="flex-shrink-0">
                       <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-white/50">
