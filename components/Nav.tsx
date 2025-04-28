@@ -7,7 +7,7 @@ const links = [
   { name: "About", href: "/#about" },
   { name: "Projects", href: "/#projects" },
 
-  // { name: "Blog", href: "/#blog" },
+  { name: "Blog", href: "/blog" },
   { name: "Testimonials", href: "/#testimonials" },
   { name: "Technologies", href: "/#technologies" },
   { name: "Experience", href: "/#experience" },
@@ -36,7 +36,7 @@ export default function CreativeNavigation() {
       >
         <nav
           className={`flex   items-center transition-all justify-center  ${
-            scrolled ? "gap-8" : "gap-16"
+            scrolled ? "gap-6" : "gap-10 lg:gap-16"
           }`}
         >
           {links.map((link) => (
