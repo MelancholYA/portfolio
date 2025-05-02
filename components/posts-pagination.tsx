@@ -18,7 +18,7 @@ const PostsPagination = async ({ category, currentPage }: Props) => {
 
   const totalCount = await client.fetch<number>(COUNT_QUERY, {}, options);
   const totalPages = Math.ceil(totalCount / PAGE_SIZE);
-  console.log(totalCount, totalPages);
+
   if (totalPages < 2) return;
 
   return (

@@ -1,11 +1,12 @@
 "use client";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import TestimonialsSection from "../sections/Testemonials";
 
-const SectionLoader = dynamic(() => import("../components/section-loader"), {
-  ssr: true,
-});
+const Loader = () => (
+  <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black z-[9999]">
+    <span className="loader"></span>
+  </div>
+);
 
 const sections = {
   Hero: dynamic(() => import("../sections/Hero"), { ssr: true }),
@@ -17,34 +18,32 @@ const sections = {
   Experience: dynamic(() => import("../sections/Experience"), {
     ssr: true,
   }),
+  Testimonials: dynamic(() => import("../sections/Testemonials"), {
+    ssr: true,
+  }),
   Contact: dynamic(() => import("../sections/contact"), { ssr: true }),
 };
 
 const Page = () => {
-  const { Hero, About, Projects, Technologies, Experience, Contact } = sections;
+  const {
+    Hero,
+    About,
+    Projects,
+    Technologies,
+    Experience,
+    Testimonials,
+    Contact,
+  } = sections;
 
   return (
     <main>
-      <SectionLoader variant="pulse" />
-      <Suspense>
+      <Suspense fallback={<Loader />}>
         <Hero />
-      </Suspense>
-      <Suspense>
         <About />
-      </Suspense>
-      <Suspense>
         <Projects />
-      </Suspense>
-      <Suspense>
         <Technologies />
-      </Suspense>
-      <Suspense>
         <Experience />
-      </Suspense>
-      <Suspense>
-        <TestimonialsSection />
-      </Suspense>
-      <Suspense>
+        <Testimonials />
         <Contact />
       </Suspense>
     </main>

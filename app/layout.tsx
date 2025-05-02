@@ -7,20 +7,22 @@ import { Suspense } from "react";
 import Nav from "../components/Nav";
 
 const GridBackground = dynamic(() => import("../components/Grid"), {
-  ssr: true,
+  loading: () => <div className="loader">Loading Grid...</div>,
 });
 const PatternGrid = dynamic(() => import("../components/Pattern"), {
-  ssr: true,
+  loading: () => <div className="loader">Loading Pattern...</div>,
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
+  display: "swap",
 });
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "600"],
   variable: "--font-poppins",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -82,17 +84,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${playfair.variable} ${poppins.variable} font-sans relative`}
-      >
+      <body className={`${playfair.variable} ${poppins.variable} font-sans `}>
         <Nav />
         {children}
-        <Suspense>
+        <Suspense fallback={<div className="loader">Loading...</div>}>
           <PatternGrid />
           <GridBackground />
         </Suspense>
         <script
           type="application/ld+json"
+          defer
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(schemaData),
           }}

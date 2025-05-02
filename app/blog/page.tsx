@@ -1,6 +1,50 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { FeaturedPosts } from "../../components/featured-posts";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Yacine Ouardi | Blog | Frontend Development, Career Growth, and More",
+  description:
+    "Explore my blog where I write about frontend development, career tips, personal branding, and the latest tech trends.",
+  keywords: [
+    "Frontend Development",
+    "React",
+    "TypeScript",
+    "Career Growth",
+    "Personal Branding",
+    "Web Development",
+    "Tech Trends",
+  ],
+  openGraph: {
+    title: "Yacine Ouardi | Blog",
+    description:
+      "Explore my blog where I write about frontend development, career tips, personal branding, and the latest tech trends.",
+    url: "https://yacine-ouardi.vercel.app/blog",
+    siteName: "Yacine Ouardi Blog",
+    images: [
+      {
+        url: "https://yacine-ouardi.vercel.app/blog-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Yacine Ouardi Blog",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yacine Ouardi | Blog",
+    description:
+      "Explore my blog where I write about frontend development, career tips, personal branding, and the latest tech trends.",
+    images: ["https://yacine-ouardi.vercel.app/blog-image.png"],
+  },
+  robots: "index, follow",
+  authors: {
+    url: "https://yacine-ouardi.vercel.app/",
+    name: "Yacine Ouardi",
+  },
+};
 
 export default function Home() {
   return (

@@ -14,7 +14,7 @@ const options = { next: { revalidate: 30 } };
 export async function FeaturedPosts() {
   const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
   const builder = ImageUrlBuilder(client);
-  console.log(posts);
+
   if (!posts.length)
     return (
       <div

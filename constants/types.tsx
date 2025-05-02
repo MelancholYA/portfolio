@@ -6,4 +6,5 @@ export type PostType = {
   authorName: string;
   publishedAt: string;
   image: string;
+  body: string;
 };

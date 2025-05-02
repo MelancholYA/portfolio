@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
 export default {
   content: [
@@ -26,6 +27,7 @@ export default {
         serif: ["var(--font-playfair)", "serif"],
         sans: ["var(--font-poppins)", "sans-serif"],
       },
+
       container: {
         center: true,
         padding: "1rem",
@@ -58,5 +60,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [typography],
 } satisfies Config;

@@ -12,7 +12,6 @@ interface SectionLoaderProps {
 export default function SectionLoader({
   duration = 5,
   onLoadingComplete,
-  variant = "circles",
 }: SectionLoaderProps) {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);

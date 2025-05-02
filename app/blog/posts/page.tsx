@@ -7,6 +7,7 @@ import PostsPagination from "../../../components/posts-pagination";
 import { PAGE_SIZE } from "../../../constants/fetch";
 import Post from "../../../components/post";
 import { PostType } from "../../../constants/types";
+import { Metadata } from "next";
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 const CATEGORIES_QUERY = `*[
@@ -14,6 +15,51 @@ const CATEGORIES_QUERY = `*[
 ]|order(publishedAt desc)[0...12]{name}`;
 
 const options = { next: { revalidate: 30 } };
+
+export const metadata: Metadata = {
+  title:
+    "Yacine Ouardi | All Blog Posts | Frontend Development, Career Growth, and More",
+  description:
+    "Browse all my blog posts on topics like frontend development, career tips, personal branding, and the latest trends in tech.",
+  keywords: [
+    "Frontend Development",
+    "React",
+    "TypeScript",
+    "Career Growth",
+    "Personal Branding",
+    "Web Development",
+    "Tech Trends",
+    "All Blog Posts",
+  ],
+  openGraph: {
+    title: "Yacine Ouardi | All Blog Posts",
+    description:
+      "Browse all my blog posts on topics like frontend development, career tips, personal branding, and the latest trends in tech.",
+    url: "https://yacine-ouardi.vercel.app/blog/all-posts",
+    siteName: "Yacine Ouardi Blog",
+    images: [
+      {
+        url: "https://yacine-ouardi.vercel.app/blog-image.png",
+        width: 1200,
+        height: 630,
+        alt: "All Blog Posts - Yacine Ouardi",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yacine Ouardi | All Blog Posts",
+    description:
+      "Browse all my blog posts on topics like frontend development, career tips, personal branding, and the latest trends in tech.",
+    images: ["https://yacine-ouardi.vercel.app/blog-image.png"],
+  },
+  robots: "index, follow",
+  authors: {
+    url: "https://yacine-ouardi.vercel.app/",
+    name: "Yacine Ouardi",
+  },
+};
 
 export default async function Page({
   searchParams,

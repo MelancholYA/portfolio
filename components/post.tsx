@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { client } from "../tools/sanity/client";
 import { PostType } from "../constants/types";
+import { MoveRight } from "lucide-react";
 
 type Props = {
   post: PostType;
@@ -19,13 +20,13 @@ const Post = ({ post, withImage = false }: Props) => {
         </span>
         <div className="px-1">
           <h3 className="font-semibold capitalize my-4">{post?.title}</h3>
-          <p>{post?.summary}</p>
+          <p className="text-white/70">{post?.summary}</p>
           <Link
-            className="mt-2 block"
+            className="mt-2  text-white font-semibold flex items-center gap-2"
             href={`/blog/posts/${post?.slug.current}`}
           >
             {" "}
-            Read full article{" "}
+            Read full article <MoveRight />
           </Link>
           <p className="md:mt-16 mt-4">
             {post?.authorName} <br />

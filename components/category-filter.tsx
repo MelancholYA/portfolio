@@ -66,12 +66,12 @@ export function CategoryFilter({ categories }: CategoryFilterProps) {
   }, []);
 
   return (
-    <div className="relative flex items-center max-w-80">
+    <div className="relative flex items-center max-w-80 px-6">
       {/* Left arrow */}
       {isOverflowing && (
         <button
           onClick={() => scroll("left")}
-          className="absolute left-0 z-10 h-full px-2 text-white bg-gradient-to-r from-black/20 to-transparent"
+          className="absolute left-0 z-10 h-full px-2 text-white "
           aria-label="Scroll left"
         >
           ◀
@@ -81,7 +81,7 @@ export function CategoryFilter({ categories }: CategoryFilterProps) {
       {/* Scrollable category buttons */}
       <div
         ref={scrollContainerRef}
-        className="flex overflow-x-auto no-scrollbar gap-2 md:p-2"
+        className="flex overflow-x-auto no-scrollbar gap-2 md:p-2 "
       >
         <button
           className={`whitespace-nowrap rounded-full text-xs bg-primary/20 text-white p-1 px-3 border-[1px] hue ${
@@ -111,7 +111,7 @@ export function CategoryFilter({ categories }: CategoryFilterProps) {
       {isOverflowing && (
         <button
           onClick={() => scroll("right")}
-          className="absolute right-0 z-10 h-full px-2 text-white bg-gradient-to-l from-black/20 to-transparent"
+          className="absolute right-0 z-10 h-full px-2 text-white "
           aria-label="Scroll right"
         >
           ▶
