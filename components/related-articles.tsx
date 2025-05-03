@@ -20,7 +20,7 @@ export default async function RelatedPostsSidebar({
         _type == "post" ${category ? `&& category->name == "${category}"` : ""}
         && defined(slug.current) && slug.current != "${currentSlug}"
       ]|order(publishedAt desc)[0...5]{_id, title, slug,image, publishedAt,"authorName":author->name, "categoryTitle": category->name,summary}`;
-  console.log(POSTS_QUERY);
+
   const posts = await client.fetch<SanityDocument<PostType>[]>(
     POSTS_QUERY,
     {},

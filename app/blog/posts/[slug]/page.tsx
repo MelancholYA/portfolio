@@ -12,22 +12,24 @@ import ReadingProgressBar from "../../../../components/reading-progressbar";
 import RelatedPostsSidebar from "../../../../components/related-articles";
 import { Metadata } from "next";
 
-const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]{...,"authorName":author->name,"categoryTitle":category->name}`;
+const POST_QUERY = `*[_type == "post" && slug.current == $postSlug][0]{...,"authorName":author->name,"categoryTitle":category->name}`;
 
 const options = { next: { revalidate: 30 } };
 
 type Props = {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // fetch data
+  const { slug } = await params;
   const post = await client.fetch<SanityDocument<PostType>>(
     POST_QUERY,
-    await params,
+    { postSlug: slug },
     options
   );
+
+  const builder = ImageUrlBuilder(client);
+  const imageUrl = builder.image(post?.image).url();
 
   return {
     title: `${post.title} - Yacine Ouardi | Blog`,
@@ -51,8 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Yacine Ouardi Blog",
       images: [
         {
-          url:
-            post.image || "https://yacine-ouardi.vercel.app/default-image.png",
+          url: imageUrl || "https://yacine-ouardi.vercel.app/me.png",
           width: 1200,
           height: 630,
           alt: post.title,
@@ -66,9 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description:
         post.summary ||
         "Read this blog post on web development, career growth, and more.",
-      images: [
-        post.image || "https://yacine-ouardi.vercel.app/default-image.png",
-      ],
+      images: [post.image || "https://yacine-ouardi.vercel.app/me.png"],
     },
     robots: "index, follow",
     authors: {
@@ -78,70 +77,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// export const metadata = (post: {
-//   title: string;
-//   summary: string;
-//   slug: { current: string };
-//   image: string;
-// }): Metadata => ({
-//   title: `${post.title} - Yacine Ouardi | Blog`,
-//   description:
-//     post.summary ||
-//     "Read this blog post on web development, career growth, and more.",
-//   keywords: [
-//     "Frontend Development",
-//     "React",
-//     "TypeScript",
-//     "Web Development",
-//     "Career Growth",
-//     "Tech Trends",
-//   ],
-//   openGraph: {
-//     title: `${post.title} - Yacine Ouardi`,
-//     description:
-//       post.summary ||
-//       "Read this blog post on web development, career growth, and more.",
-//     url: `https://yacine-ouardi.vercel.app/blog/${post.slug.current}`,
-//     siteName: "Yacine Ouardi Blog",
-//     images: [
-//       {
-//         url: post.image || "https://yacine-ouardi.vercel.app/default-image.png",
-//         width: 1200,
-//         height: 630,
-//         alt: post.title,
-//       },
-//     ],
-//     type: "article",
-//   },
-//   twitter: {
-//     card: "summary_large_image",
-//     title: `${post.title} - Yacine Ouardi`,
-//     description:
-//       post.summary ||
-//       "Read this blog post on web development, career growth, and more.",
-//     images: [
-//       post.image || "https://yacine-ouardi.vercel.app/default-image.png",
-//     ],
-//   },
-//   robots: "index, follow",
-//   authors: {
-//     url: "https://yacine-ouardi.vercel.app/",
-//     name: "Yacine Ouardi",
-//   },
-// });
-
 export default async function PostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const post = await client.fetch<SanityDocument<PostType>>(
     POST_QUERY,
-    await params,
+    { postSlug: slug },
     options
   );
 
   const builder = ImageUrlBuilder(client);
+  const imageUrl = builder.image(post?.image).url();
 
   const url = `${process.env.BASE_URL}blog/posts/${(await params).slug}`;
 
@@ -189,9 +138,9 @@ export default async function PostPage({
                 {post?.image && (
                   <figure>
                     <Image
-                      src={builder.image(post?.image).url()}
+                      src={imageUrl}
                       alt={`Cover image for ${post.title}`}
-                      className="aspect-video rounded-xl w-full"
+                      className=" rounded-xl w-full"
                       width={550}
                       height={310}
                     />

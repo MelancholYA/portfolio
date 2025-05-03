@@ -6,14 +6,25 @@ import ImageUrlBuilder from "@sanity/image-url";
 import { MonitorXIcon } from "lucide-react";
 
 const POSTS_QUERY = `*[
-    _type == "post" && tag->name == "featured" && defined(slug.current) 
-  ]|order(publishedAt desc)[0...3]{_id, title, slug,image, publishedAt,tag,"authorName":author->name, "categoryTitle": category->title,summary}`;
-
+  _type == "post" && "featured" in tags[]->name && defined(slug.current)
+]|order(publishedAt desc)[0...3]{
+  _id,
+  title,
+  slug,
+  image,
+  publishedAt,
+  tags,
+  "authorName": author->name,
+  "categoryTitle": category->title,
+  summary
+}`;
 const options = { next: { revalidate: 30 } };
 
 export async function FeaturedPosts() {
   const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
   const builder = ImageUrlBuilder(client);
+
+  console.log(posts);
 
   if (!posts.length)
     return (

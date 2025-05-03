@@ -41,7 +41,7 @@ const Post = ({ post, withImage = false }: Props) => {
       {post?.image && withImage && (
         <Image
           alt="alternative"
-          className="w-5/12 h-auto object-cover md:block hidden"
+          className="shrink-0 w-5/12 aspect-video  rounded h-auto object-cover md:block hidden"
           width={200}
           height={200}
           src={builder.image(post?.image).url()}
