@@ -32,8 +32,8 @@ export default async function RelatedPostsSidebar({
   if (!posts.length) return null;
 
   return (
-    <aside className="w-full lg:self-start lg:p-6 py-12">
-      <div className="bg-primary/10   border-s-2  border-gray-700 p-6">
+    <aside className="w-full lg:w-6/12  lg:self-start md:p-6 p-3">
+      <div className="bg-primary/10  rounded-lg   p-6 lg:p-3">
         <h2 className="text-xl font-bold text-white mb-6 pb-2 border-b border-gray-800">
           Related Articles
         </h2>
@@ -41,7 +41,7 @@ export default async function RelatedPostsSidebar({
           {posts.map((post) => (
             <div
               key={post.slug.current}
-              className="group pb-2 border-b border-gray-800"
+              className="group pb-2 border-b last-of-type:border-b-0 border-gray-800"
             >
               <Link href={post.slug.current} className="block">
                 <div className="mb-3 overflow-hidden rounded-md">

@@ -111,7 +111,7 @@ async function PostContentWrapper({ slug }: { slug: string }) {
       <main className="container relative min-h-screen max-w-3xl p-6 lg:py-24">
         <Breadcrumbs />
         <div className="flex flex-col lg:flex-row w-full bg-primary/10 hue">
-          <article className="flex flex-col py-16 gap-6 w-full p-3 md:p-6 rounded">
+          <article className="flex flex-col pt-16 gap-6 w-full p-3 md:p-6 rounded">
             <div className="prose prose-lg prose-invert mx-auto">
               <PostHeader post={post} url={url} />
               <PostContent post={post} imageUrl={imageUrl} />
