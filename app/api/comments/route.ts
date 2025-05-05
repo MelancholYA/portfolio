@@ -14,6 +14,8 @@ export async function POST(req: NextRequest) {
     const { name, email, comment, postId }: CommentRequestBody =
       await req.json();
 
+    console.log(postId);
+
     console.log(process.env.NEXT_PUBLIC_SANITY_TOKEN);
     await client.create({
       _type: "comment",

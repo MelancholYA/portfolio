@@ -21,6 +21,7 @@ export default function AddComment({ postId }: CommentSectionProps) {
     name: "",
     email: "",
     comment: "",
+    postId: postId,
   });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({ name: "", email: "", comment: "" });
@@ -73,7 +74,7 @@ export default function AddComment({ postId }: CommentSectionProps) {
         console.error("Error submitting comment:", response);
       }
       setSubmitted(true);
-      setFormData({ name: "", email: "", comment: "" });
+      setFormData({ name: "", email: "", comment: "", postId: postId });
     } catch (error) {
       console.error("Error submitting comment:", error);
     } finally {
@@ -104,7 +105,6 @@ export default function AddComment({ postId }: CommentSectionProps) {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input type="hidden" value={postId} name="postId" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label
