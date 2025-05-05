@@ -1,13 +1,33 @@
 import { type SanityDocument } from "next-sanity";
 import { client } from "../../../tools/sanity/client";
-import Link from "next/link";
-import { CategoryFilter } from "../../../components/category-filter";
-import { MonitorXIcon } from "lucide-react";
-import PostsPagination from "../../../components/posts-pagination";
 import { PAGE_SIZE } from "../../../constants/fetch";
-import Post from "../../../components/post";
 import { PostType } from "../../../constants/types";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+
+const CategoryFilter = dynamic(
+  () => import("../../../components/blog/category-filter"),
+  { ssr: true }
+);
+const NoPostsAvailable = dynamic(
+  () =>
+    import("../../../components/blog/not-available").then((mod) => mod.default),
+  { ssr: true }
+);
+const PostsList = dynamic(
+  () =>
+    import("../../../components/blog/posts-list").then((mod) => mod.default),
+  { ssr: true }
+);
+const PostsPagination = dynamic(
+  () =>
+    import("../../../components/blog/posts-pagination").then(
+      (mod) => mod.default
+    ),
+  { ssr: true }
+);
+
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 const CATEGORIES_QUERY = `*[
@@ -61,6 +81,27 @@ export const metadata: Metadata = {
   },
 };
 
+async function fetchPosts(
+  category: string | undefined,
+  start: number,
+  end: number
+) {
+  const POSTS_QUERY = `*[
+    _type == "post" ${category ? `&& category->name == "${category}"` : ""}
+    && defined(slug.current) 
+  ]|order(publishedAt desc)[${start}...${end}]{_id, title, slug, image, publishedAt, "authorName": author->name, "categoryTitle": category->name, summary}`;
+
+  return client.fetch<SanityDocument<PostType>[]>(POSTS_QUERY, {}, options);
+}
+
+async function fetchCategories() {
+  return client.fetch<SanityDocument<{ name: string }>[]>(
+    CATEGORIES_QUERY,
+    {},
+    options
+  );
+}
+
 export default async function Page({
   searchParams,
 }: {
@@ -72,63 +113,38 @@ export default async function Page({
   };
   const pageNum = parseInt(page || "1");
   const start = (pageNum - 1) * PAGE_SIZE;
-  const end = pageNum + PAGE_SIZE;
+  const end = start + PAGE_SIZE;
 
-  const POSTS_QUERY = `*[
-  _type == "post" ${category ? `&& category->name == "${category}"` : ""}
-  && defined(slug.current) 
-]|order(publishedAt desc)[${start}...${end}]{_id, title, slug,image, publishedAt,"authorName":author->name, "categoryTitle": category->name,summary}`;
-
-  console.log(POSTS_QUERY);
-  const posts = await client.fetch<SanityDocument<PostType>[]>(
-    POSTS_QUERY,
-    {},
-    options
-  );
-  const categories = await client.fetch<SanityDocument<{ name: string }>[]>(
-    CATEGORIES_QUERY,
-    {},
-    options
-  );
+  const [posts, categories] = await Promise.all([
+    fetchPosts(category, start, end),
+    fetchCategories(),
+  ]);
 
   return (
-    <main className="container pt-32 pb-6 mx-auto min-h-screen max-w-3xl ">
-      <div className="flex items-center justify-between flex-wrap">
+    <main className="container pt-32 pb-6 mx-auto min-h-screen max-w-3xl">
+      <header className="flex items-center justify-between flex-wrap">
         <h1 className="text-4xl font-bold mb-3 text-white/80">All Articles</h1>
-        <CategoryFilter categories={categories} />
-      </div>
-      {!posts.length && (
-        <div
-          className={`flex min-h-96 py-32 flex-col items-center justify-center  text-center `}
+        <Suspense
+          fallback={
+            <div className="h-8 rounded-full bg-gradient-to-l from-primary/60 animate-pulse to-white/60 w-72" />
+          }
         >
-          <MonitorXIcon className="h-16 w-16 text-gray-400" />
+          <CategoryFilter categories={categories} />
+        </Suspense>
+      </header>
 
-          <h3 className="mt-6 text-xl font-light text-primary">
-            No posts available at the moment.
-          </h3>
-          <p className="mt-2 max-w-md text-gray-500">
-            We&apos;re working on creating new content. Please check back soon
-            for updates.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/blog">Return to home</Link>
+      <Suspense
+        fallback={
+          <div className="w-full bg-gradient-to-l from-primary/60 animate-pulse to-white/60 h-[70vh] my-6 rounded"></div>
+        }
+      >
+        {!posts.length ? <NoPostsAvailable /> : <PostsList posts={posts} />}
+      </Suspense>
 
-            <Link href="/#contact">Contact us</Link>
-          </div>
-        </div>
-      )}
-      <ul className="flex flex-col gap-y-4 list-none my-8">
-        {posts[0] && <Post post={posts[0]} withImage />}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 md:gap-y-12">
-          {posts
-            .filter((_, i) => i > 0)
-            .map((post) => (
-              <Post key={`posts-${post.slug.current}`} post={post} />
-            ))}
-        </div>
-      </ul>
       <div className="ms-auto w-fit">
-        <PostsPagination category={category} currentPage={pageNum} />
+        <Suspense fallback={<div>Loading ...</div>}>
+          <PostsPagination category={category} currentPage={pageNum} />
+        </Suspense>
       </div>
     </main>
   );

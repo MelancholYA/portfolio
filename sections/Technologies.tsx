@@ -1,4 +1,4 @@
-import SkillsetGrid from "../components/Skills";
+import SkillsetGrid from "../components/general/Skills";
 
 const Technologies = () => {
   return (

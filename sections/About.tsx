@@ -1,4 +1,4 @@
-import ImageDistorion from "../components/ImageDistorion";
+import ImageDistorion from "../components/general/ImageDistorion";
 
 const myJourney = {
   title: "My Journey",

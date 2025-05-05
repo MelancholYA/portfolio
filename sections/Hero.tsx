@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BsFillMouseFill } from "react-icons/bs";
-import SkillsetGrid from "../components/Skills";
+import SkillsetGrid from "../components/general/Skills";
 
 const Hero = () => {
   return (

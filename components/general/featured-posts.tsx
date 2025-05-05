@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { client } from "../tools/sanity/client";
+import { client } from "../../tools/sanity/client";
 import { SanityDocument } from "next-sanity";
 import ImageUrlBuilder from "@sanity/image-url";
 import { MonitorXIcon } from "lucide-react";
@@ -52,7 +52,7 @@ export async function FeaturedPosts() {
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {posts.map((post) => (
         <article
-          key={post.id}
+          key={post._id}
           className="bg-black/20 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
         >
           <Link href={`/blog/posts/${post?.slug.current}`} className="block">

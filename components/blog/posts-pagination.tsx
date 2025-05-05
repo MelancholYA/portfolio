@@ -1,6 +1,6 @@
-import { client } from "../tools/sanity/client";
-import { PAGE_SIZE } from "../constants/fetch";
 import Link from "next/link";
+import { client } from "../../tools/sanity/client";
+import { PAGE_SIZE } from "../../constants/fetch";
 
 type Props = {
   category?: string;

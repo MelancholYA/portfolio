@@ -4,12 +4,12 @@ import "./globals.css";
 
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import Nav from "../components/Nav";
+import Nav from "../components/general/Nav";
 
-const GridBackground = dynamic(() => import("../components/Grid"), {
+const GridBackground = dynamic(() => import("../components/general/Grid"), {
   loading: () => <div className="loader">Loading Grid...</div>,
 });
-const PatternGrid = dynamic(() => import("../components/Pattern"), {
+const PatternGrid = dynamic(() => import("../components/general/Pattern"), {
   loading: () => <div className="loader">Loading Pattern...</div>,
 });
 

@@ -8,7 +8,7 @@ interface CategoryFilterProps {
   }[];
 }
 
-export function CategoryFilter({ categories }: CategoryFilterProps) {
+const CategoryFilter = ({ categories }: CategoryFilterProps) => {
   const params = useSearchParams();
   const router = useRouter();
   const pathName = usePathname();
@@ -119,4 +119,6 @@ export function CategoryFilter({ categories }: CategoryFilterProps) {
       )}
     </div>
   );
-}
+};
+
+export default CategoryFilter;

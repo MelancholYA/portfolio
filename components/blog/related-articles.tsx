@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { client } from "../tools/sanity/client";
+import { client } from "../../tools/sanity/client";
 import { SanityDocument } from "next-sanity";
-import { PostType } from "../constants/types";
+import { PostType } from "../../constants/types";
 import ImageUrlBuilder from "@sanity/image-url";
 
 interface RelatedPostsSidebarProps {
