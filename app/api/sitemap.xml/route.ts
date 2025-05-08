@@ -1,5 +1,7 @@
 import { client } from "../../../tools/sanity/client";
 
+export const dynamic = "force-dynamic"; // 👈 Ensures no caching
+
 const query = `*[_type == "post"]{ "slug": slug.current, _updatedAt }`;
 
 export async function GET() {
