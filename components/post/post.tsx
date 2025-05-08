@@ -19,7 +19,12 @@ const Post = ({ post, withImage = false }: Props) => {
           {post?.categoryTitle}
         </span>
         <div className="px-1">
-          <h3 className="font-semibold capitalize my-4">{post?.title}</h3>
+          <h3
+            title={post?.title}
+            className="font-semibold capitalize my-4 line-clamp-4"
+          >
+            {post?.title}
+          </h3>
           <p className="text-white/70 line-clamp-4">{post?.summary}</p>
           <Link
             className="mt-2  text-white font-semibold flex items-center gap-2"
