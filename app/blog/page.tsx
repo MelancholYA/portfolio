@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "Yacine Ouardi Blog",
     images: [
       {
-        url: "https://yacine-ouardi.vercel.app/blog-image.png",
+        url: "https://yacine-ouardi.vercel.app/me.png",
         width: 1200,
         height: 630,
         alt: "Yacine Ouardi Blog",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Yacine Ouardi | Blog",
     description:
       "Explore my blog where I write about frontend development, career tips, personal branding, and the latest tech trends.",
-    images: ["https://yacine-ouardi.vercel.app/blog-image.png"],
+    images: ["https://yacine-ouardi.vercel.app/me.png"],
   },
   robots: "index, follow",
   authors: {

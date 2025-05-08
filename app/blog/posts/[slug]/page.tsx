@@ -39,6 +39,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await fetchPost(slug);
   const imageUrl = buildImageUrl(post?.image);
 
+  console.log(imageUrl);
+
   return {
     title: `${post.title} - Yacine Ouardi | Blog`,
     description:
@@ -57,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description:
         post.summary ||
         "Read this blog post on web development, career growth, and more.",
-      url: `https://yacine-ouardi.vercel.app/blog/${post.slug.current}`,
+      url: `https://yacine-ouardi.vercel.app/blog/posts/${post.slug.current}`,
       siteName: "Yacine Ouardi Blog",
       images: [
         {
