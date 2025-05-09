@@ -1,4 +1,5 @@
 // app/api/comments/route.ts
+import { transporter } from "../../../tools/mail";
 import { client } from "../../../tools/sanity/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -14,9 +15,23 @@ export async function POST(req: NextRequest) {
     const { name, email, comment, postId }: CommentRequestBody =
       await req.json();
 
-    console.log(postId);
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER, // Sending to yourself
+      subject: `a new comment from ${name}`,
+      text: `
+          Name: ${name}
+          Email: ${email}
+          Comment: ${comment}
+        `,
+      html: `
+          <h3>New Contact Form Submission</h3>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Comment:</strong> ${comment}</p>
+        `,
+    };
 
-    console.log(process.env.NEXT_PUBLIC_SANITY_TOKEN);
     await client.create({
       _type: "comment",
       name,
@@ -24,6 +39,8 @@ export async function POST(req: NextRequest) {
       comment,
       post: { _type: "reference", _ref: postId },
     });
+
+    await transporter.sendMail(mailOptions);
 
     return NextResponse.json({ message: "Comment submitted" }, { status: 200 });
   } catch (err) {
