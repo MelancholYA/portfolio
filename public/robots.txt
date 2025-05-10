@@ -1,3 +1,3 @@
 User-agent: *
 
-Sitemap: https://yacine-ouardi.vercel.app/sitemap.xml
+Sitemap: https://yacine-ouardi.vercel.app/api/sitemap.xml
