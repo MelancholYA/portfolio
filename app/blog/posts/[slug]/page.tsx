@@ -39,8 +39,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await fetchPost(slug);
   const imageUrl = buildImageUrl(post?.image);
 
-  console.log(imageUrl);
-
   return {
     title: `${post.title} - Yacine Ouardi | Blog`,
     description:
@@ -70,6 +68,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
       ],
       type: "article",
+      locale: "en_US",
+      publishedTime: post.publishedAt,
+      modifiedTime: post.publishedAt,
+      authors: ["https://yacine-ouardi.vercel.app/"],
     },
     twitter: {
       card: "summary_large_image",
@@ -77,13 +79,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description:
         post.summary ||
         "Read this blog post on web development, career growth, and more.",
-      images: [post.image || "https://yacine-ouardi.vercel.app/me.png"],
+      images: [imageUrl || "https://yacine-ouardi.vercel.app/me.png"],
+      creator: "@YacineOuardi",
     },
     robots: "index, follow",
     authors: {
       url: "https://yacine-ouardi.vercel.app/",
       name: "Yacine Ouardi",
     },
+    alternates: {
+      canonical: `https://yacine-ouardi.vercel.app/blog/posts/${post.slug.current}`,
+    },
+    themeColor: "#1a202c",
+    category: post.categoryTitle || "Frontend Development",
   };
 }
 
