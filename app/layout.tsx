@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import Nav from "../components/general/Nav";
+import Script from "next/script";
 
 const GridBackground = dynamic(() => import("../components/general/Grid"), {
   loading: () => <div className="loader">Loading Grid...</div>,
@@ -86,6 +87,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/favicon.ico" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-5VMD7ZZGHK"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-5VMD7ZZGHK');
+            `,
+          }}
+        />
+      </head>
       <body className={`${playfair.variable} ${poppins.variable} font-sans `}>
         <Nav />
         {children}
