@@ -1,28 +1,30 @@
 import { type SanityDocument } from "next-sanity";
-import { client } from "../../../tools/sanity/client";
-import { PAGE_SIZE } from "../../../constants/fetch";
-import { PostType } from "../../../constants/types";
+import { client } from "../../../../tools/sanity/client";
+import { PAGE_SIZE } from "../../../../constants/fetch";
+import { PostType } from "../../../../constants/types";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
 const CategoryFilter = dynamic(
-  () => import("../../../components/blog/category-filter"),
+  () => import("../../../../components/blog/category-filter"),
   { ssr: true }
 );
 const NoPostsAvailable = dynamic(
   () =>
-    import("../../../components/blog/not-available").then((mod) => mod.default),
+    import("../../../../components/blog/not-available").then(
+      (mod) => mod.default
+    ),
   { ssr: true }
 );
 const PostsList = dynamic(
   () =>
-    import("../../../components/blog/posts-list").then((mod) => mod.default),
+    import("../../../../components/blog/posts-list").then((mod) => mod.default),
   { ssr: true }
 );
 const PostsPagination = dynamic(
   () =>
-    import("../../../components/blog/posts-pagination").then(
+    import("../../../../components/blog/posts-pagination").then(
       (mod) => mod.default
     ),
   { ssr: true }
@@ -119,6 +121,8 @@ export default async function Page({
     fetchPosts(category, start, end),
     fetchCategories(),
   ]);
+
+  console.log({ posts });
 
   return (
     <main className="container pt-32 pb-6 mx-auto min-h-screen max-w-3xl">

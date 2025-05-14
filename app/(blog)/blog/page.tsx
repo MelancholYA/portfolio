@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { FeaturedPosts } from "../../components/general/featured-posts";
+import { FeaturedPosts } from "../../../components/general/featured-posts";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

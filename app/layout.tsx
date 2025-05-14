@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Poppins } from "next/font/google";
-import "./globals.css";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-import Nav from "../components/general/Nav";
-import Script from "next/script";
+import "./globals.css";
+import Footer from "../components/general/footer";
 
 const GridBackground = dynamic(() => import("../components/general/Grid"), {
   loading: () => <div className="loader">Loading Grid...</div>,
 });
+
 const PatternGrid = dynamic(() => import("../components/general/Pattern"), {
   loading: () => <div className="loader">Loading Pattern...</div>,
 });
@@ -21,6 +22,7 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
   display: "swap",
 });
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "600"],
@@ -82,9 +84,9 @@ const schemaData = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <head>
@@ -108,8 +110,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${playfair.variable} ${poppins.variable} font-sans `}>
-        <Nav />
+      <body className={`${playfair.variable} ${poppins.variable} font-sans`}>
         {children}
         <Suspense fallback={<div className="loader">Loading...</div>}>
           <PatternGrid />
@@ -122,28 +123,7 @@ export default function RootLayout({
             __html: JSON.stringify(schemaData),
           }}
         />
-        <footer className="py-8 border-t border-gray-100 hue">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-sm text-gray-500">© 2025 Yacine Ouardi</p>
-              <div className="flex space-x-4 mt-4 md:mt-0">
-                <a
-                  href="https://github.com/melancholYA/"
-                  className="text-primary hover:text-white"
-                >
-                  GitHub
-                </a>
-
-                <a
-                  href="https://www.linkedin.com/in/yacine-ouardi/"
-                  className="text-primary hover:text-white"
-                >
-                  LinkedIn
-                </a>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
         <Analytics />
         <SpeedInsights />
       </body>

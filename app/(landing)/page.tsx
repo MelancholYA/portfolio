@@ -9,19 +9,19 @@ const Loader = () => (
 );
 
 const sections = {
-  Hero: dynamic(() => import("../sections/Hero"), { ssr: true }),
-  About: dynamic(() => import("../sections/About"), { ssr: true }),
-  Projects: dynamic(() => import("../sections/Projects"), { ssr: true }),
-  Technologies: dynamic(() => import("../sections/Technologies"), {
+  Hero: dynamic(() => import("../../sections/Hero"), { ssr: true }),
+  About: dynamic(() => import("../../sections/About"), { ssr: true }),
+  Projects: dynamic(() => import("../../sections/Projects"), { ssr: true }),
+  Technologies: dynamic(() => import("../../sections/Technologies"), {
     ssr: true,
   }),
-  Experience: dynamic(() => import("../sections/Experience"), {
+  Experience: dynamic(() => import("../../sections/Experience"), {
     ssr: true,
   }),
-  Testimonials: dynamic(() => import("../sections/Testemonials"), {
+  Testimonials: dynamic(() => import("../../sections/Testemonials"), {
     ssr: true,
   }),
-  Contact: dynamic(() => import("../sections/contact"), { ssr: true }),
+  Contact: dynamic(() => import("../../sections/contact"), { ssr: true }),
 };
 
 const Page = () => {
