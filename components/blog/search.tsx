@@ -68,6 +68,7 @@ export function ExpandableSearch() {
                     <li
                       key={post.slug.current}
                       className=" flex items-center px-1"
+                      onClick={() => setInputValue("")}
                     >
                       •
                       <Link
