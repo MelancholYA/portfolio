@@ -11,19 +11,19 @@ export async function GET() {
     `
     <url>
       <loc>https://yacine-ouardi.vercel.app/</loc>
-      <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
+      <lastmod>${new Date("01/02/2025").toISOString().split("T")[0]}</lastmod>
       <priority>1.0</priority>
     </url>`,
     `
     <url>
       <loc>https://yacine-ouardi.vercel.app/blog</loc>
-      <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
+      <lastmod>${new Date("01/01/2025").toISOString().split("T")[0]}</lastmod>
       <priority>0.9</priority>
     </url>`,
     `
     <url>
       <loc>https://yacine-ouardi.vercel.app/blog/posts</loc>
-      <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
+      <lastmod>${new Date("01/02/2025").toISOString().split("T")[0]}</lastmod>
       <priority>0.8</priority>
     </url>`,
   ];
@@ -33,7 +33,7 @@ export async function GET() {
     <url>
       <loc>https://yacine-ouardi.vercel.app/blog/posts/${post.slug}</loc>
       <lastmod>${post._updatedAt.split("T")[0]}</lastmod>
-      <priority>0.7</priority>
+      <priority>0.8</priority>
     </url>
   `
   );
