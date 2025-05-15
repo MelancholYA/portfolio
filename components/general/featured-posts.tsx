@@ -7,7 +7,7 @@ import { MonitorXIcon } from "lucide-react";
 
 const POSTS_QUERY = `*[
   _type == "post" && "featured" in tags[]->name && defined(slug.current)
-]|order(publishedAt desc)[0...3]{
+]|order(publishedAt desc)[0...6]{
   _id,
   title,
   slug,
