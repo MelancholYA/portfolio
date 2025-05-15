@@ -2,17 +2,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ExpandableSearch } from "../blog/search";
 
 const links = [
-  { name: "About", href: "/#about" },
-  { name: "Projects", href: "/#projects" },
-  { name: "Skills", href: "/#technologies" },
-  { name: "Experience", href: "/#experience" },
-  { name: "Testimonials", href: "/#testimonials" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Home", href: "/blog" },
+  { name: "All Posts", href: "/blog/posts" },
 ];
 
-export default function Nav() {
+export default function BlogNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -62,13 +59,8 @@ export default function Nav() {
                 />
               </Link>
             ))}
+            <ExpandableSearch />
           </div>
-          <Link
-            href="/blog"
-            className=" text-white rounded p-1 px-4 border-2 hover:bg-white/40 bg-black border-primary"
-          >
-            Blog
-          </Link>
         </nav>
       </header>
       <header className="lg:hidden">
@@ -111,12 +103,6 @@ export default function Nav() {
                 <span className="h-1 w-4 rounded-sm block bg-primary " />
               </Link>
             ))}
-            <Link
-              href="/blog"
-              className=" text-white w-1/2 block text-center mx-auto  rounded-sm p-1 px-4 border bg-white/40  border-primary"
-            >
-              Blog
-            </Link>{" "}
           </div>
         </nav>
       </header>

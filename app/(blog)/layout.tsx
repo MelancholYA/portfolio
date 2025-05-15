@@ -1,5 +1,5 @@
-import Link from "next/link";
 import React from "react";
+import BlogNav from "../../components/general/blog-nav";
 
 type Props = {
   children: React.ReactNode;
@@ -8,18 +8,7 @@ type Props = {
 const layout = ({ children }: Props) => {
   return (
     <div>
-      <header
-        className={`fixed hidden items-center justify-center md:block top-0 w-full p-3  z-[9999] transition-all duration-300 
-          bg-black/40 backdrop-blur-xl
-        `}
-      >
-        <nav
-          className={`flex  gap-9 items-center transition-all justify-center `}
-        >
-          <Link href="/">Yacine . O</Link>
-          <Link href="/">All Posts</Link>
-        </nav>
-      </header>
+      <BlogNav />
       {children}
     </div>
   );

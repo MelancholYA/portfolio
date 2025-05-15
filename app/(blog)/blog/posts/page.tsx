@@ -125,9 +125,11 @@ export default async function Page({
   console.log({ posts });
 
   return (
-    <main className="container pt-32 pb-6 mx-auto min-h-screen max-w-3xl">
+    <main className="container md:pt-32 pt-12 pb-6 mx-auto min-h-screen max-w-3xl">
       <header className="flex items-center justify-between flex-wrap">
-        <h1 className="text-4xl font-bold mb-3 text-white/80">All Articles</h1>
+        <h1 className="text-4xl font-bold md:mb-3 mb-7 text-white/80">
+          All Articles
+        </h1>
         <Suspense
           fallback={
             <div className="h-8 rounded-full bg-gradient-to-l from-primary/60 animate-pulse to-white/60 w-72" />
