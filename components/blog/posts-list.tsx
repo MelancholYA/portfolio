@@ -10,9 +10,6 @@ const PostsList = ({ posts }: { posts: SanityDocument<PostType>[] }) => {
         {posts.slice(1).map((post, i) => (
           <div
             key={`posts-${post.slug.current}`}
-            // style={{
-            //   gridColumn: "1 / 2",
-            // }}
             className={`h-full ${
               (i + 1) % 3 === 0
                 ? "md:col-span-2 lg:col-span-3"
