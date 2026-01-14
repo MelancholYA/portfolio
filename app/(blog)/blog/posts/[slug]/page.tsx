@@ -57,11 +57,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description:
         post.summary ||
         "Read this blog post on web development, career growth, and more.",
-      url: `https://yacine-ouardi.vercel.app/blog/posts/${post.slug.current}`,
+      url: `https://yacine-ouardi.com/blog/posts/${post.slug.current}`,
       siteName: "Yacine Ouardi Blog",
       images: [
         {
-          url: imageUrl || "https://yacine-ouardi.vercel.app/me.png",
+          url: imageUrl || "https://yacine-ouardi.com/me.png",
           width: 1200,
           height: 630,
           alt: post.title,
@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: "en_US",
       publishedTime: post.publishedAt,
       modifiedTime: post.publishedAt,
-      authors: ["https://yacine-ouardi.vercel.app/"],
+      authors: ["https://yacine-ouardi.com/"],
     },
     twitter: {
       card: "summary_large_image",
@@ -79,16 +79,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description:
         post.summary ||
         "Read this blog post on web development, career growth, and more.",
-      images: [imageUrl || "https://yacine-ouardi.vercel.app/me.png"],
+      images: [imageUrl || "https://yacine-ouardi.com/me.png"],
       creator: "@YacineOuardi",
     },
     robots: "index, follow",
     authors: {
-      url: "https://yacine-ouardi.vercel.app/",
+      url: "https://yacine-ouardi.com/",
       name: "Yacine Ouardi",
     },
     alternates: {
-      canonical: `https://yacine-ouardi.vercel.app/blog/posts/${post.slug.current}`,
+      canonical: `https://yacine-ouardi.com/blog/posts/${post.slug.current}`,
     },
     themeColor: "#1a202c",
     category: post.categoryTitle || "Frontend Development",

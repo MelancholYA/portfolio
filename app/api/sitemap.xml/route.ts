@@ -10,19 +10,19 @@ export async function GET() {
   const staticUrls = [
     `
     <url>
-      <loc>https://yacine-ouardi.vercel.app/</loc>
+      <loc>https://yacine-ouardi.com/</loc>
       <lastmod>${new Date("01/02/2025").toISOString().split("T")[0]}</lastmod>
       <priority>1.0</priority>
     </url>`,
     `
     <url>
-      <loc>https://yacine-ouardi.vercel.app/blog</loc>
+      <loc>https://yacine-ouardi.com/blog</loc>
       <lastmod>${new Date("01/01/2025").toISOString().split("T")[0]}</lastmod>
       <priority>0.9</priority>
     </url>`,
     `
     <url>
-      <loc>https://yacine-ouardi.vercel.app/blog/posts</loc>
+      <loc>https://yacine-ouardi.com/blog/posts</loc>
       <lastmod>${new Date("01/02/2025").toISOString().split("T")[0]}</lastmod>
       <priority>0.8</priority>
     </url>`,
@@ -31,7 +31,7 @@ export async function GET() {
   const postUrls = posts.map(
     (post: { slug: string; _updatedAt: string }) => `
     <url>
-      <loc>https://yacine-ouardi.vercel.app/blog/posts/${post.slug}</loc>
+      <loc>https://yacine-ouardi.com/blog/posts/${post.slug}</loc>
       <lastmod>${post._updatedAt.split("T")[0]}</lastmod>
       <priority>0.8</priority>
     </url>

@@ -45,11 +45,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Yacine Ouardi | Frontend Developer",
     description: "Frontend Developer skilled in React, Next.js & TypeScript.",
-    url: "https://yacine-ouardi.vercel.app/",
+    url: "https://yacine-ouardi.com/",
     siteName: "Yacine Ouardi",
     images: [
       {
-        url: "https://yacine-ouardi.vercel.app/me.png",
+        url: "https://yacine-ouardi.com/me.png",
         width: 1200,
         height: 630,
         alt: "Yacine Ouardi Portfolio",
@@ -61,11 +61,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Yacine Ouardi | Frontend Developer",
     description: "Frontend Developer skilled in React, Next.js & TypeScript.",
-    images: ["https://yacine-ouardi.vercel.app/me.png"],
+    images: ["https://yacine-ouardi.com/me.png"],
   },
   robots: "index, follow",
   authors: {
-    url: "https://yacine-ouardi.vercel.app/",
+    url: "https://yacine-ouardi.com/",
     name: "Yacine Ouardi",
   },
 };
@@ -75,7 +75,7 @@ const schemaData = {
   "@type": "Person",
   name: "Yacine Ouardi",
   jobTitle: "Frontend Developer",
-  url: "https://yacine-ouardi.vercel.app/",
+  url: "https://yacine-ouardi.com/",
   sameAs: [
     "https://github.com/MelancholYA",
     "https://www.linkedin.com/in/yacine-ouardi",

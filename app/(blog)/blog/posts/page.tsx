@@ -57,11 +57,11 @@ export const metadata: Metadata = {
     title: "Yacine Ouardi | All Blog Posts",
     description:
       "Browse all my blog posts on topics like frontend development, career tips, personal branding, and the latest trends in tech.",
-    url: "https://yacine-ouardi.vercel.app/blog/posts",
+    url: "https://yacine-ouardi.com/blog/posts",
     siteName: "Yacine Ouardi Blog",
     images: [
       {
-        url: "https://yacine-ouardi.vercel.app/me.png",
+        url: "https://yacine-ouardi.com/me.png",
         width: 1200,
         height: 630,
         alt: "All Blog Posts - Yacine Ouardi",
@@ -74,11 +74,11 @@ export const metadata: Metadata = {
     title: "Yacine Ouardi | All Blog Posts",
     description:
       "Browse all my blog posts on topics like frontend development, career tips, personal branding, and the latest trends in tech.",
-    images: ["https://yacine-ouardi.vercel.app/me.png"],
+    images: ["https://yacine-ouardi.com/me.png"],
   },
   robots: "index, follow",
   authors: {
-    url: "https://yacine-ouardi.vercel.app/",
+    url: "https://yacine-ouardi.com/",
     name: "Yacine Ouardi",
   },
 };
