@@ -1,3 +1,109 @@
+# Default rules for all search engines
 User-agent: *
+Allow: /
 
+# Disallow crawling of server-side search and API endpoints
+Disallow: /api/
+Disallow: /admin/
+Disallow: /server-sitemap.xml
+Disallow: /tools/
+Disallow: /constants/
+Disallow: /components/
+Disallow: /*.env
+Disallow: /*.env.*
+
+# Allow crawling of main static content and the blog
+Allow: /blog/
+Allow: /blog/posts/
+Allow: /me.png
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.pdf$
+
+# Crawl-delay for all robots (prevent server overload)
+Crawl-delay: 1
+
+# Primary sitemap location
 Sitemap: https://yacine-ouardi.com/api/sitemap.xml
+
+# Google-specific directives
+User-agent: Googlebot
+Allow: /
+Allow: /blog/
+Allow: /blog/posts/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.env*
+Crawl-delay: 0
+
+# Google Image Bot
+User-agent: Googlebot-Image
+Allow: /
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+
+# Bing-specific directives
+User-agent: Bingbot
+Allow: /
+Allow: /blog/
+Allow: /blog/posts/
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 1
+
+# Other major search engines
+User-agent: Slurp
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 2
+
+User-agent: Sogou
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 2
+
+User-agent: Exabot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 1
+
+User-agent: facebot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: ia_archiver
+Allow: /
+Disallow: /api/
+Disallow: /admin/

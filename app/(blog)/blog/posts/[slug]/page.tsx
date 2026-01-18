@@ -127,10 +127,92 @@ export default async function PostPage({
 async function PostContentWrapper({ slug }: { slug: string }) {
   const post = await fetchPost(slug);
   const imageUrl = buildImageUrl(post?.image);
-  const url = `${process.env.BASE_URL}blog/posts/${slug}`;
+  const url = `https://yacine-ouardi.com/blog/posts/${slug}`;
+
+  // Article/BlogPosting structured data
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.summary || post.title,
+    image: imageUrl || "https://yacine-ouardi.com/me.png",
+    author: {
+      "@type": "Person",
+      name: post.authorName || "Yacine Ouardi",
+      url: "https://yacine-ouardi.com/",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Yacine Ouardi",
+      url: "https://yacine-ouardi.com/",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://yacine-ouardi.com/me.png",
+      },
+    },
+    datePublished: post.publishedAt || new Date().toISOString(),
+    dateModified: post._updatedAt || post.publishedAt || new Date().toISOString(),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    articleSection: post.categoryTitle || "Frontend Development",
+    keywords: [
+      post.categoryTitle || "Web Development",
+      "Frontend Development",
+      "React",
+      "TypeScript",
+    ].join(", "),
+    url: url,
+    inLanguage: "en-US",
+  };
+
+  // BreadcrumbList structured data
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://yacine-ouardi.com/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://yacine-ouardi.com/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "All Posts",
+        item: "https://yacine-ouardi.com/blog/posts",
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: post.title,
+        item: url,
+      },
+    ],
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
       <ShareModal title={post.title} url={url} />
       <ReadingProgressBar />
       <main className="container relative min-h-screen max-w-3xl p-6 lg:py-24">

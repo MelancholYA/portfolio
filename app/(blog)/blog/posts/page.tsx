@@ -140,10 +140,49 @@ export default async function Page({
     fetchCategories(),
   ]);
 
-  console.log({ posts });
+  // CollectionPage structured data for blog posts listing
+  const collectionPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "All Blog Posts",
+    description: "Browse all my blog posts on topics like frontend development, career tips, personal branding, and the latest trends in tech.",
+    url: `https://yacine-ouardi.com/blog/posts${category ? `?category=${category}` : ""}${pageNum > 1 ? `${category ? "&" : "?"}page=${pageNum}` : ""}`,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: posts.length,
+      itemListElement: posts.map((post: SanityDocument<PostType>, index: number) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "BlogPosting",
+          headline: post.title,
+          url: `https://yacine-ouardi.com/blog/posts/${post.slug.current}`,
+          datePublished: post.publishedAt,
+        },
+      })),
+    },
+    author: {
+      "@type": "Person",
+      name: "Yacine Ouardi",
+      url: "https://yacine-ouardi.com/",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Yacine Ouardi",
+      url: "https://yacine-ouardi.com/",
+    },
+    inLanguage: "en-US",
+  };
 
   return (
-    <main className="container md:pt-32 pt-12 pb-6 mx-auto min-h-screen max-w-3xl">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(collectionPageSchema),
+        }}
+      />
+      <main className="container md:pt-32 pt-12 pb-6 mx-auto min-h-screen max-w-3xl">
       <header className="flex items-center justify-between flex-wrap">
         <h1 className="text-4xl font-bold md:mb-3 mb-7 text-white/80">
           All Articles
@@ -171,5 +210,6 @@ export default async function Page({
         </Suspense>
       </div>
     </main>
+    </>
   );
 }

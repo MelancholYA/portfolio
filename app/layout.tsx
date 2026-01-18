@@ -93,7 +93,7 @@ export const metadata: Metadata = {
   category: "Portfolio",
 };
 
-const schemaData = {
+const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Yacine Ouardi",
@@ -103,6 +103,35 @@ const schemaData = {
     "https://github.com/MelancholYA",
     "https://www.linkedin.com/in/yacine-ouardi",
   ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Yacine Ouardi",
+  url: "https://yacine-ouardi.com/",
+  description: "Frontend Developer skilled in React, Next.js & TypeScript. Explore my portfolio, projects, and skills.",
+  author: {
+    "@type": "Person",
+    name: "Yacine Ouardi",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Yacine Ouardi",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://yacine-ouardi.com/me.png",
+    },
+  },
+  inLanguage: "en-US",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://yacine-ouardi.com/blog/posts?search={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 export default function RootLayout({
@@ -141,9 +170,14 @@ export default function RootLayout({
         </Suspense>
         <script
           type="application/ld+json"
-          defer
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemaData),
+            __html: JSON.stringify(personSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
           }}
         />
         <Footer />

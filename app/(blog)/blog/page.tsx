@@ -66,8 +66,41 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Yacine Ouardi Blog",
+    description: "Explore my blog where I write about frontend development, career tips, personal branding, and the latest tech trends.",
+    url: "https://yacine-ouardi.com/blog",
+    author: {
+      "@type": "Person",
+      name: "Yacine Ouardi",
+      url: "https://yacine-ouardi.com/",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Yacine Ouardi",
+      url: "https://yacine-ouardi.com/",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://yacine-ouardi.com/me.png",
+      },
+    },
+    inLanguage: "en-US",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://yacine-ouardi.com/blog",
+    },
+  };
+
   return (
     <div className="min-h-screen ">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(blogSchema),
+        }}
+      />
       <main>
         {/* Hero Section */}
         <section className="py-16 md:py-24 min-h-[70vh] grid place-items-center">
