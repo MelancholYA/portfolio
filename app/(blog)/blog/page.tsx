@@ -4,7 +4,7 @@ import { FeaturedPosts } from "../../../components/general/featured-posts";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Yacine Ouardi | Blog | Frontend Development, Career Growth, and More",
+  title: "Blog | Frontend Development, Career Growth, and More",
   description:
     "Explore my blog where I write about frontend development, career tips, personal branding, and the latest tech trends.",
   keywords: [
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
       },
     ],
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
@@ -38,12 +39,30 @@ export const metadata: Metadata = {
     description:
       "Explore my blog where I write about frontend development, career tips, personal branding, and the latest tech trends.",
     images: ["https://yacine-ouardi.com/me.png"],
+    creator: "@YacineOuardi",
   },
-  robots: "index, follow",
-  authors: {
-    url: "https://yacine-ouardi.com/",
-    name: "Yacine Ouardi",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
+  authors: [
+    {
+      url: "https://yacine-ouardi.com/",
+      name: "Yacine Ouardi",
+    },
+  ],
+  alternates: {
+    canonical: "https://yacine-ouardi.com/blog",
+  },
+  themeColor: "#1a202c",
+  category: "Blog",
 };
 
 export default function Home() {

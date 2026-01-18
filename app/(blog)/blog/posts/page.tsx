@@ -39,8 +39,7 @@ const CATEGORIES_QUERY = `*[
 const options = { next: { revalidate: 30 } };
 
 export const metadata: Metadata = {
-  title:
-    "Yacine Ouardi | All Blog Posts | Frontend Development, Career Growth, and More",
+  title: "All Blog Posts | Frontend Development, Career Growth, and More",
   description:
     "Browse all my blog posts on topics like frontend development, career tips, personal branding, and the latest trends in tech.",
   keywords: [
@@ -68,6 +67,7 @@ export const metadata: Metadata = {
       },
     ],
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
@@ -75,12 +75,30 @@ export const metadata: Metadata = {
     description:
       "Browse all my blog posts on topics like frontend development, career tips, personal branding, and the latest trends in tech.",
     images: ["https://yacine-ouardi.com/me.png"],
+    creator: "@YacineOuardi",
   },
-  robots: "index, follow",
-  authors: {
-    url: "https://yacine-ouardi.com/",
-    name: "Yacine Ouardi",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
+  authors: [
+    {
+      url: "https://yacine-ouardi.com/",
+      name: "Yacine Ouardi",
+    },
+  ],
+  alternates: {
+    canonical: "https://yacine-ouardi.com/blog/posts",
+  },
+  themeColor: "#1a202c",
+  category: "Blog",
 };
 
 async function fetchPosts(

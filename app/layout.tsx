@@ -31,7 +31,10 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Yacine Ouardi | Frontend Developer | React, Next.js, TypeScript",
+  title: {
+    default: "Yacine Ouardi | Frontend Developer | React, Next.js, TypeScript",
+    template: "%s | Yacine Ouardi",
+  },
   description:
     "Frontend Developer skilled in React, Next.js & TypeScript. Explore my portfolio, projects, and skills.",
   keywords: [
@@ -56,18 +59,38 @@ export const metadata: Metadata = {
       },
     ],
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Yacine Ouardi | Frontend Developer",
     description: "Frontend Developer skilled in React, Next.js & TypeScript.",
     images: ["https://yacine-ouardi.com/me.png"],
+    creator: "@YacineOuardi",
   },
-  robots: "index, follow",
-  authors: {
-    url: "https://yacine-ouardi.com/",
-    name: "Yacine Ouardi",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
+  authors: [
+    {
+      url: "https://yacine-ouardi.com/",
+      name: "Yacine Ouardi",
+    },
+  ],
+  alternates: {
+    canonical: "https://yacine-ouardi.com",
+  },
+  metadataBase: new URL("https://yacine-ouardi.com"),
+  themeColor: "#1a202c",
+  category: "Portfolio",
 };
 
 const schemaData = {

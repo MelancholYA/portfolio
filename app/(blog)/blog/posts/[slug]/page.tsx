@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const imageUrl = buildImageUrl(post?.image);
 
   return {
-    title: `${post.title} - Yacine Ouardi | Blog`,
+    title: `${post.title} | Blog`,
     description:
       post.summary ||
       "Read this blog post on web development, career growth, and more.",
@@ -51,6 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "Web Development",
       "Career Growth",
       "Tech Trends",
+      post.categoryTitle || "Blog",
     ],
     openGraph: {
       title: `${post.title} - Yacine Ouardi`,
@@ -72,6 +73,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.publishedAt,
       modifiedTime: post.publishedAt,
       authors: ["https://yacine-ouardi.com/"],
+      section: post.categoryTitle || "Frontend Development",
+      tags: [post.categoryTitle || "Web Development"],
     },
     twitter: {
       card: "summary_large_image",
@@ -82,11 +85,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [imageUrl || "https://yacine-ouardi.com/me.png"],
       creator: "@YacineOuardi",
     },
-    robots: "index, follow",
-    authors: {
-      url: "https://yacine-ouardi.com/",
-      name: "Yacine Ouardi",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
+    authors: [
+      {
+        url: "https://yacine-ouardi.com/",
+        name: "Yacine Ouardi",
+      },
+    ],
     alternates: {
       canonical: `https://yacine-ouardi.com/blog/posts/${post.slug.current}`,
     },
