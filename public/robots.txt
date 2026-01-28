@@ -30,7 +30,7 @@ Allow: /*.pdf$
 Crawl-delay: 1
 
 # Primary sitemap location
-Sitemap: https://yacine-ouardi.com/api/sitemap.xml
+Sitemap: https://yacine-ouardi.com/sitemap.xml
 
 # Google-specific directives
 User-agent: Googlebot
