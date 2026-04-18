@@ -1,6 +1,6 @@
-"use client";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import { FeaturedPosts } from "../../components/general/featured-posts";
 
 const Loader = () => (
   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black z-[9999]">
@@ -43,6 +43,14 @@ const Page = () => {
         <Projects />
         <Technologies />
         <Experience />
+        <section className="py-12 bg-primary/10 hue">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl font-light mb-8 text-center">
+              Featured Articles
+            </h2>
+            <FeaturedPosts />
+          </div>
+        </section>
         <Testimonials />
         <Contact />
       </Suspense>
