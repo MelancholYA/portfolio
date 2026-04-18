@@ -26,8 +26,6 @@ Allow: /*.svg$
 Allow: /*.webp$
 Allow: /*.pdf$
 
-# Crawl-delay for all robots (prevent server overload)
-Crawl-delay: 1
 
 # Primary sitemap location
 Sitemap: https://yacine-ouardi.com/sitemap.xml

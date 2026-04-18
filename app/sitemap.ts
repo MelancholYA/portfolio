@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { client } from "../tools/sanity/client";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60 * 60; // 1 hour
 
 const query = `*[_type == "post"]{
   "slug": slug.current,
@@ -9,60 +9,53 @@ const query = `*[_type == "post"]{
   publishedAt
 }`;
 
+type Post = {
+  slug: string;
+  _updatedAt?: string;
+  publishedAt?: string;
+};
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await client.fetch(query);
+  const posts: Post[] = await client.fetch(query);
   const now = new Date();
 
+  // ✅ Deduplicate by slug
+  const uniquePosts: Post[] = Array.from(
+    new Map(posts.map((p) => [p.slug, p])).values(),
+  );
+
+  // ✅ Static pages (only real, valuable ones)
   const staticUrls: MetadataRoute.Sitemap = [
     {
       url: "https://yacine-ouardi.com/",
       lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1.0,
     },
     {
       url: "https://yacine-ouardi.com/blog",
       lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.9,
     },
     {
       url: "https://yacine-ouardi.com/blog/posts",
       lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.8,
     },
   ];
 
-  const postUrls: MetadataRoute.Sitemap = posts.map(
-    (post: { slug: string; _updatedAt?: string; publishedAt?: string }) => {
-      const lastModified = post._updatedAt
-        ? new Date(post._updatedAt)
-        : post.publishedAt
-          ? new Date(post.publishedAt)
-          : now;
+  // ✅ Blog posts
+  const postUrls: MetadataRoute.Sitemap = uniquePosts.map((post) => {
+    const rawDate = post._updatedAt || post.publishedAt || now.toISOString();
 
-      const publishedDate = post.publishedAt ? new Date(post.publishedAt) : now;
+    let lastModified = new Date(rawDate);
 
-      const daysSincePublished = Math.floor(
-        (Date.now() - publishedDate.getTime()) / (1000 * 60 * 60 * 24),
-      );
+    // ✅ Prevent future dates
+    if (lastModified > now) {
+      lastModified = now;
+    }
 
-      const changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] =
-        daysSincePublished < 30
-          ? "weekly"
-          : daysSincePublished < 90
-            ? "monthly"
-            : "yearly";
-
-      return {
-        url: `https://yacine-ouardi.com/blog/posts/${post.slug}`,
-        lastModified,
-        changeFrequency,
-        priority: 0.7,
-      };
-    },
-  );
+    return {
+      url: `https://yacine-ouardi.com/blog/posts/${post.slug}`,
+      lastModified,
+    };
+  });
 
   return [...staticUrls, ...postUrls];
 }
