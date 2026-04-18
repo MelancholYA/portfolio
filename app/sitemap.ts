@@ -1,8 +1,6 @@
 import { MetadataRoute } from "next";
 import { client } from "../tools/sanity/client";
 
-export const revalidate = 60 * 60; // 1 hour
-
 const query = `*[_type == "post"]{
   "slug": slug.current,
   _updatedAt,
